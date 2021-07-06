@@ -1,0 +1,22 @@
+.divider {
+    text-align: center;
+}
+
+.btns-div {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.btn-tag {
+    margin: 0;
+}
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.textfield {
+    margin-bottom: 20px;
+}

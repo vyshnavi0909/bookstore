@@ -1,0 +1,72 @@
+body,
+html {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+.page-container {
+    background-color: #919191;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 700px;
+    background-color: #E1E4EA;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo-container {
+    padding: 70px;
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+    border: none;
+    border-radius: 100px;
+}
+
+.login-signup {
+    background-color: #ffffff;
+    width: 300px;
+    padding: 20px 40px;
+    position: absolute;
+    height: 370px;
+    bottom: -35px;
+    right: 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.divider {
+    text-align: center;
+}
+
+.btns-div {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.btn-tag {
+    margin: 0;
+}
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.textfield {
+    margin-bottom: 20px;
+}
