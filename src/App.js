@@ -6,7 +6,7 @@ import Home from "./pages/home/Home";
 function App() {
   return (
     <Router>
-      <Route exact path="/bookstore" component={LoginSignUp}></Route>
+      <Route exact path="/" component={LoginSignUp}></Route>
       <Route exact path="/bookstore/home" component={Home}></Route>
     </Router>
   );

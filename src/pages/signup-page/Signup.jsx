@@ -79,7 +79,7 @@ export default function Signup() {
         .signup(data)
         .then((res) => {
           console.log(res);
-          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("token", res.result.accessToken);
         })
         .catch((err) => {
           console.log(err);

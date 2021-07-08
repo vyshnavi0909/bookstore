@@ -70,3 +70,30 @@ html {
 .textfield {
     margin-bottom: 20px;
 }
+
+@media only screen and (max-width:700px) {
+    .logo-container {
+        display: none;
+    }
+
+    .container {
+        height: 100%;
+        border-radius: 0;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .login-signup {
+        position: unset;
+        padding: 0;
+
+    }
+
+    .page-container {
+        background-color: #ffffff;
+    }
+
+}

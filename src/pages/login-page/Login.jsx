@@ -42,7 +42,8 @@ export default function Login() {
       services
         .login(data)
         .then((res) => {
-          localStorage.setItem("token", res.data.id);
+          console.log(res);
+          localStorage.setItem("token", res.data.result.accessToken);
           history.push("/bookstore/home");
         })
         .catch((err) => {
