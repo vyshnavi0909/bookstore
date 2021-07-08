@@ -10,6 +10,18 @@ const services = new UserServices();
 export default function Home() {
   const [books, setBooks] = useState();
   const [loading, setLoading] = useState(true);
+  const [cartCount, setCount] = useState();
+
+  const getCartItems = () => {
+    services
+      .getFromCart()
+      .then((res) => {
+        setCount(res.data.result.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   //   getting books from api
   var getBooks = () => {
@@ -29,13 +41,14 @@ export default function Home() {
   //similar to componentDidMount
   useEffect(() => {
     getBooks();
+    getCartItems();
   }, []);
 
   return (
     <div>
-      <Header />
+      <Header count={cartCount} />
       <div className="home-body">
-        {loading ? null : <DisplayBooks books={books} />}
+        {loading ? null : <DisplayBooks books={books} getBooks={getBooks} />}
       </div>
 
       <Footer />
