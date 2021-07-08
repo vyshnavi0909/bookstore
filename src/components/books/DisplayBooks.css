@@ -1,7 +1,7 @@
 .display-books-header {
     display: flex;
     justify-content: space-between;
-    padding: 30px 100px;
+    padding: 30px 150px;
 }
 
 .header-text-div {
@@ -21,26 +21,31 @@
 
 .books-container {
     display: flex;
-    padding: 0px 100px;
+    padding: 0px 120px;
     flex-flow: row wrap;
     font-family: sans-serif;
-    justify-content: space-between;
 }
 
 .single-book-container {
-    width: 300px;
+    width: 340px;
     border: none;
-    margin-bottom: 30px;
+    margin: 3%;
+    margin-bottom: 50px;
 }
 
 .book-div {
-    padding: 16px;
+    padding: 30px;
 }
 
 .book-image {
     text-align: center;
     background-color: #F5F5F5;
-    padding: 20px 0;
+    padding: 40px 0;
+}
+
+.image {
+    width: 170px;
+    height: 180px;
 }
 
 .book-name {
@@ -59,4 +64,18 @@
 .book-btns {
     display: flex;
     justify-content: space-between;
+}
+
+.btn-after-clicked {
+    width: 100%;
+}
+
+.page-number {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.each-page-num {
+    margin: 0 20px;
 }
