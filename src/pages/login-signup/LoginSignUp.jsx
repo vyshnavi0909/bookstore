@@ -7,8 +7,6 @@ import Signup from "../signup-page/Signup";
 
 export default function LoginSignup() {
   const [click, setClick] = useState(false);
-  // const [loginBtn, setLoginColor] = useState("#000000");
-  // const [signupBtn, setSignupColor] = useState("#878787");
 
   const loginColor = click ? "#878787" : "#000000";
   const signupColor = click ? "#000000" : "#878787";
