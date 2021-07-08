@@ -1,0 +1,40 @@
+.home-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #A03037;
+    color: #fff;
+    padding: 10px;
+}
+
+.header-book-icon {
+    margin: 0 10px;
+}
+
+.header-text {
+    text-transform: uppercase;
+    display: flex;
+}
+
+.header-search-div {
+    border-radius: 5px;
+    width: 50%;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #a1a1a1;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    border: none;
+}
+
+.header-cart-icon {
+    display: flex;
+    align-items: center;
+}
+
+.cart-tag {
+    margin: 0 10px;
+}
