@@ -2,9 +2,9 @@ import AxiosServices from "./AxiosServices";
 const axios = new AxiosServices();
 const baseUrl = "https://new-bookstore-backend.herokuapp.com/";
 const config = {
-  header: {
+  headers: {
     "Content-Type": "application/json",
-    Authorization: localStorage.getItem("token"),
+    "x-access-token": localStorage.getItem("token"),
   },
 };
 
@@ -22,7 +22,25 @@ class UserServices {
   };
 
   getBooks = () => {
-    return axios.getMethod(`${baseUrl}bookstore_user/get/book`, config);
+    return axios.getMethod(`${baseUrl}bookstore_user/get/book`);
+  };
+
+  addToCart = (product_id) => {
+    // console.log(config.header.Authorization);
+    return axios.postMethod(
+      `${baseUrl}bookstore_user/add_cart_item/${product_id}`,
+      null,
+      config
+    );
+  };
+
+  getFromCart = () => {
+    return axios.getMethod(`${baseUrl}bookstore_user/get_cart_items`, {
+      headers: {
+        accept: "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+    });
   };
 }
 
