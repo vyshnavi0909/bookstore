@@ -42,7 +42,7 @@ export default function Home() {
   useEffect(() => {
     getBooks();
     getCartItems();
-  }, []);
+  }, [cartCount]);
 
   return (
     <div>

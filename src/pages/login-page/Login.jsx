@@ -44,7 +44,7 @@ export default function Login() {
         .then((res) => {
           console.log(res);
           localStorage.setItem("token", res.data.result.accessToken);
-          history.push("/bookstore/home");
+          history.push("/bookstore");
         })
         .catch((err) => {
           console.log(err);
