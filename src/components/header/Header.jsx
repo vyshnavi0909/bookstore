@@ -4,8 +4,14 @@ import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import "./Header.css";
 import book from "./education.svg";
 import { Badge } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 export default function Header(props) {
+  const history = new useHistory();
+
+  const openCart = () => {
+    history.push("/bookstore/cart");
+  };
   return (
     <div>
       <header className="home-header">
@@ -27,7 +33,7 @@ export default function Header(props) {
         >
           <p className="cart-tag">Cart</p>
           <Badge badgeContent={props.count} color="secondary">
-            <CartIcon />
+            <CartIcon onClick={openCart} />
           </Badge>
         </div>
       </header>
