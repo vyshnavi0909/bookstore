@@ -1,3 +1,76 @@
 .cart-container {
     height: 100%;
+    margin: 10%;
+}
+
+.place-order-div,
+.Customer-details-div,
+.order-summary-div {
+    padding: 30px 50px;
+    padding-bottom: 20px;
+    border: 1px solid #dadada;
+    border-radius: 3px;
+    margin: 20px 10px;
+}
+
+.cart-heading-text {
+    font-size: 22px;
+}
+
+.cart-book-div {
+    display: flex;
+}
+
+.cart-book-div-order {
+    display: flex;
+    margin: 30px 0;
+
+}
+
+.book-details {
+    margin-left: 20px;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+}
+
+.quantity {
+    padding: 5px 15px;
+    border: 1px solid #727272;
+}
+
+.book-quantity {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.place-order-btn,
+.checkout-btn,
+.continue-btn {
+    text-align: end;
+}
+
+.textarea-div {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text-input {
+    width: 47%;
+}
+
+.address-ta {
+    outline: none;
+    border: none;
+}
+
+.addr-ta {
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
 }
