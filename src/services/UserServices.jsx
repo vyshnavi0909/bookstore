@@ -42,6 +42,22 @@ class UserServices {
       },
     });
   };
+
+  cartItemQuantity = (id, data) => {
+    return axios.putMethod(
+      `${baseUrl}bookstore_user/cart_item_quantity/${id}`,
+      data,
+      config
+    );
+  };
+
+  editCustomerDetails = (data) => {
+    return axios.putMethod(`${baseUrl}bookstore_user/edit_user`, data, config);
+  };
+
+  placeOrder = (data) => {
+    return axios.postMethod(`${baseUrl}bookstore_user/add/order`, data, config);
+  };
 }
 
 export default UserServices;
