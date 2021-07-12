@@ -1,17 +1,28 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Card, CardContent } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  Fade,
+  Paper,
+  Popper,
+  Typography,
+} from "@material-ui/core";
 import bookImage from "./bookImage.png";
 import "./DisplayBooks.css";
 import UserService from "../../services/UserServices";
 
 const services = new UserService();
 export default function DisplayBooks(props) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+  const [bookDescription, setDesc] = useState("");
   const booksList = props.books;
   const [cartBooks, setCartBooks] = useState();
   const [pager, setPager] = useState({
     books: booksList,
     currentPage: 1,
-    booksPerPage: 6,
+    booksPerPage: 8,
   });
 
   const { books, currentPage, booksPerPage } = pager;
@@ -68,6 +79,19 @@ export default function DisplayBooks(props) {
       }
     }
     return false;
+  };
+
+  const handleDescOnHover = (e, book) => {
+    if (book.description !== undefined) {
+      setDesc(book.description);
+    }
+
+    setAnchorEl(e.currentTarget);
+    setOpen(true);
+  };
+
+  const handleOnLeave = (e) => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -137,7 +161,12 @@ export default function DisplayBooks(props) {
       </div>
       <div className="books-container">
         {currentBooks.map((book, index) => (
-          <div className="single-book-container" key={index}>
+          <div
+            className="single-book-container"
+            key={index}
+            onMouseOver={(e) => handleDescOnHover(e, book)}
+            onMouseOut={handleOnLeave}
+          >
             <Card
               style={{
                 border: "1px solid #E2E2E2",
@@ -162,6 +191,23 @@ export default function DisplayBooks(props) {
           </div>
         ))}
       </div>
+      <Popper
+        open={open}
+        anchorEl={anchorEl}
+        placement="right"
+        transition
+        style={{ boxShadow: "1px 1px 5px #888" }}
+      >
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps} timeout={350}>
+            <Paper>
+              <Typography style={{ padding: "20px" }}>
+                {bookDescription}
+              </Typography>
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
       <ul className="page-number">{renderPageNums}</ul>
     </div>
   );
