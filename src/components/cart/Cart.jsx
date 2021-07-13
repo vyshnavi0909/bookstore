@@ -23,6 +23,7 @@ export default function Cart() {
   const [loading, setLoader] = useState(true);
   const [displayCustdetails, setCustOpen] = useState("none");
   const [displayOrderSum, setOrderOpen] = useState("none");
+  const [displayPlaceOrderBtn, setBtn] = useState("");
 
   const [custDetails, setDetails] = useState({
     name: "",
@@ -50,6 +51,7 @@ export default function Cart() {
   };
 
   const handlePlaceOrderBtn = () => {
+    setBtn("none");
     setCustOpen("block");
   };
 
@@ -74,6 +76,7 @@ export default function Cart() {
         .then((res) => {
           console.log("edit", res);
           setOrderOpen("block");
+          setCustOpen("none");
         })
         .catch((err) => {
           console.log("edit", err);
@@ -198,13 +201,14 @@ export default function Cart() {
               </div>
             </div>
           ))}
-          <div className="place-order-btn">
+          <div className="place-order-btn" style={{ width: "100%" }}>
             <Button
               style={{
                 backgroundColor: "#3371b5",
                 color: "#fff",
                 borderRadius: "3px",
                 padding: "7px 30px",
+                display: displayPlaceOrderBtn,
               }}
               onClick={handlePlaceOrderBtn}
             >

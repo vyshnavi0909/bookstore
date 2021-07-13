@@ -31,7 +31,7 @@ export default function Header(props) {
           className="header-cart-icon"
           // onClick={openCart}
         >
-          <p className="cart-tag">Cart</p>
+          <p className="cart-header-tag">Cart</p>
           <Badge badgeContent={props.count} color="secondary">
             <CartIcon onClick={openCart} />
           </Badge>
