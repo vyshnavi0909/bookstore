@@ -76,6 +76,13 @@ class UserServices {
     });
   };
 
+  removeFromCart = (id) => {
+    return axios.deleteMethod(
+      `${baseUrl}bookstore_user/remove_cart_item/${id}`,
+      config
+    );
+  };
+
   removeFromWishlist = (id) => {
     return axios.deleteMethod(
       `${baseUrl}bookstore_user/remove_wishlist_item/${id}`,

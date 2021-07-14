@@ -160,6 +160,16 @@ export default function Cart() {
     });
   };
 
+  const handleDelete = (id) => {
+    services.removeFromCart(id).then((res) => {
+      getCartItems();
+    });
+  };
+
+  const handleHomePage = () => {
+    history.push("/bookstore");
+  };
+
   if (count > 0) {
     display = (
       <div className="cart-container">
@@ -180,22 +190,29 @@ export default function Cart() {
                   <p className="cart-tag">by {book.product_id.author}</p>
                   <p className="cart-head">Rs. {book.product_id.price}</p>
                   <div className="book-quantity">
-                    <img
-                      className="decrement"
-                      alt="minus"
-                      src={RemoveIcon}
-                      onClick={() => onDecrement(book)}
-                    />
-                    <p className="quantity">{book.quantityToBuy}</p>
-                    <img
-                      className="increment"
-                      alt="plus"
-                      src={AddIcon}
-                      onClick={() => {
-                        onIncrement(book);
-                      }}
-                    />
-                    <p>Remove</p>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <img
+                        className="decrement"
+                        alt="minus"
+                        src={RemoveIcon}
+                        onClick={() => onDecrement(book)}
+                      />
+                      <p className="quantity">{book.quantityToBuy}</p>
+                      <img
+                        className="increment"
+                        alt="plus"
+                        src={AddIcon}
+                        onClick={() => {
+                          onIncrement(book);
+                        }}
+                      />
+                    </div>
+                    <p
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleDelete(book._id)}
+                    >
+                      Remove
+                    </p>
                   </div>
                 </div>
               </div>
@@ -399,6 +416,15 @@ export default function Cart() {
   return (
     <div>
       <Header />
+      <p className="cart-mini-header">
+        <span
+          onClick={handleHomePage}
+          style={{ cursor: "pointer", color: "#8a8a8a" }}
+        >
+          Home /
+        </span>
+        <b> My Cart</b>
+      </p>
       {loading ? <h1>loading....</h1> : display}
 
       <Footer />

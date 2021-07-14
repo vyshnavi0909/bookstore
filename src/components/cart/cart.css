@@ -1,6 +1,6 @@
 .cart-container {
     height: 100%;
-    margin: 10%;
+    margin: 10px 200px;
     font-family: serif;
 }
 
@@ -104,6 +104,12 @@
     margin-right: 250px;
 }
 
+.cart-mini-header {
+    margin: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 @media only screen and (max-width : 1100px) {
     .cust-det-div {
         margin-right: 0;
@@ -111,7 +117,20 @@
 
 }
 
+@media only screen and (max-width: 830px) {
+    .cart-container {
+        margin: 10px 100px;
+    }
+
+}
+
 @media only screen and (max-width : 700px) {
+
+    .cart-container {
+        margin: 5%;
+    }
+
+
     .text-input {
         width: 100%;
     }
@@ -128,7 +147,7 @@
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
 
     .place-order-div,
     .Customer-details-div,
@@ -137,5 +156,20 @@
         border: 1px solid #dadada;
         border-radius: 3px;
         margin: 10px;
+    }
+
+    .cart-head {
+        font-size: medium;
+    }
+
+    .cart-tag {
+        font-size: smaller;
+
+    }
+
+    .book-quantity {
+        display: flex;
+        flex-direction: column;
+        align-items: unset;
     }
 }
