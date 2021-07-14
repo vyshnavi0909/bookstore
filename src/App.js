@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/home/Home";
 import Cart from "./components/cart/Cart";
 import OrderPlaced from "./pages/ordered/OrderPlaced";
+import WishList from "./components/wishlist/WishList";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         path="/bookstore/order-placed"
         component={OrderPlaced}
       ></Route>
+      <Route exact path="/bookstore/wishlist" component={WishList}></Route>
     </Router>
   );
 }

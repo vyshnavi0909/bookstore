@@ -58,6 +58,23 @@ class UserServices {
   placeOrder = (data) => {
     return axios.postMethod(`${baseUrl}bookstore_user/add/order`, data, config);
   };
+
+  addToWishList = (product_id) => {
+    return axios.postMethod(
+      `${baseUrl}bookstore_user/add_wish_list/${product_id}`,
+      null,
+      config
+    );
+  };
+
+  getFromWishList = () => {
+    return axios.getMethod(`${baseUrl}bookstore_user/get_wishlist_items`, {
+      headers: {
+        accept: "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+    });
+  };
 }
 
 export default UserServices;
