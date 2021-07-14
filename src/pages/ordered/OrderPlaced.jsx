@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import "./OrderPlaced.css";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router";
+import UserServices from "../../services/UserServices";
+import { useState } from "react";
+import { log } from "async";
 
+const services = new UserServices();
 export default function OrderPlaced() {
+  const [userDetails, setDetails] = useState();
   const history = new useHistory();
+  const [loading, setLoader] = useState(true);
+
+  const getDetails = () => {
+    services
+      .getFromCart()
+      .then((res) => {
+        let details = res.data.result[0].user_id;
+        setDetails(details);
+
+        setLoader(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const settingAddress = () => {
+    var address =
+      userDetails.address[0].fullAddress +
+      ", " +
+      userDetails.address[0].city +
+      ", " +
+      userDetails.address[0].state;
+    return address;
+  };
+
+  useEffect(() => {
+    getDetails();
+    console.log("useEffct");
+  }, []);
 
   const handleContinueShopping = () => {
     history.push("/bookstore");
@@ -36,7 +71,22 @@ export default function OrderPlaced() {
           </div>
         </div>
       </div>
-
+      {loading ? (
+        ""
+      ) : (
+        <table className="details-table">
+          <tr>
+            <th>Email us</th>
+            <th>Contact us</th>
+            <th>Address</th>
+          </tr>
+          <tr>
+            <td>{userDetails.email}</td>
+            <td>{userDetails.phone}</td>
+            <td className="address-td">{settingAddress()}</td>
+          </tr>
+        </table>
+      )}
       <Footer />
     </div>
   );

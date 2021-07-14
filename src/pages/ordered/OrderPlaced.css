@@ -1,6 +1,6 @@
 .order-placed-page {
     text-align: center;
-    height: 82vh;
+    height: 61vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,4 +8,24 @@
 
 .continue-shopping-btn {
     margin: 50px 0;
+}
+
+.details-table {
+    /* width: 100%; */
+    margin: 45px auto;
+    margin-top: 0;
+    text-align: center;
+    border: 1px solid #a1a1a1;
+}
+
+td {
+    border-top: 1px solid #a1a1a1;
+    border-right: 1px solid #a1a1a1;
+    padding: 30px;
+
+}
+
+
+.address-td {
+    border-right: none;
 }
