@@ -73,7 +73,7 @@ export default function DisplayBooks(props) {
     if (cartbook !== undefined) {
       var count = cartbook.length;
       for (var i = 0; i < count; i++) {
-        if (cartbook[i].product_id._id === id) {
+        if (cartbook[i].product_id._id == id) {
           return true;
         }
       }
@@ -85,7 +85,6 @@ export default function DisplayBooks(props) {
     if (book.description !== undefined) {
       setDesc(book.description);
     }
-
     setAnchorEl(e.currentTarget);
     setOpen(true);
   };
@@ -96,11 +95,13 @@ export default function DisplayBooks(props) {
 
   useEffect(() => {
     getCartItems();
+    console.log("useEffct");
   }, []);
 
   const handleButton = (item_id) => {
     var present = isPresent(cartBooks, item_id);
     var btn;
+
     if (present) {
       btn = (
         <div className="btn-after-clicked">

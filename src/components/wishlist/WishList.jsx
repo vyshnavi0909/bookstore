@@ -1,17 +1,12 @@
-// import { Card } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import UserServices from "../../services/UserServices";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import "./WishList.css";
 import bookImage from "./bookImage.png";
-import { Button, TextareaAutosize, TextField } from "@material-ui/core";
+import { Button, Divider } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
+
 import { useHistory } from "react-router";
 
 const services = new UserServices();
@@ -20,9 +15,6 @@ export default function WishList() {
   const history = new useHistory();
   const [wishListBooks, setListBooks] = useState([]);
   const [loading, setLoader] = useState(true);
-  //   const [displayCustdetails, setCustOpen] = useState("none");
-  //   const [displayOrderSum, setOrderOpen] = useState("none");
-  //   const [displayPlaceOrderBtn, setBtn] = useState("");
 
   const count = wishListBooks.length;
   var display;
@@ -43,16 +35,38 @@ export default function WishList() {
     history.push("/bookstore");
   };
 
+  const handleDelete = (id) => {
+    services
+      .removeFromWishlist(id)
+      .then((res) => {
+        getWishListItems();
+      })
+      .catch((err) => {
+        console.log("remove", err);
+      });
+  };
+
+  const handleAddToCart = (id) => {
+    services
+      .addToCart(id)
+      .then((res) => {
+        handleDelete(id);
+      })
+      .catch((err) => {
+        console.log("adding ", err);
+      });
+  };
+
   if (count > 0) {
     display = (
-      <div className="cart-container">
-        <h2>My cart ({count})</h2>
+      <div className="list-container">
+        <h2 className="wishlist-header">My WishList({count})</h2>
         {wishListBooks.map((book, index) => (
           <div key={index}>
-            <div className="cart-book-div">
+            <div className="list-book-div">
               <div>
                 <img
-                  className="cart-book-image"
+                  className="list-book-image"
                   alt="bookImage"
                   src={bookImage}
                 />
@@ -62,26 +76,30 @@ export default function WishList() {
                 <p className="cart-tag">by {book.product_id.author}</p>
                 <p className="cart-head">Rs. {book.product_id.price}</p>
               </div>
+              <div className="wishlist-btns">
+                <Button>
+                  <DeleteIcon
+                    color="disabled"
+                    onClick={() => handleDelete(book.product_id._id)}
+                  />
+                </Button>
+                <Button
+                  style={{
+                    backgroundColor: "#3371b5",
+                    color: "#fff",
+                    borderRadius: "3px",
+                    padding: "7px 30px",
+                    height: "50px",
+                  }}
+                  onClick={() => handleAddToCart(book.product_id._id)}
+                >
+                  Add to cart
+                </Button>
+              </div>
             </div>
+            <Divider />
           </div>
         ))}
-        <div className="place-order-btn" style={{ width: "100%" }}>
-          <Button>
-            <DeleteIcon />
-          </Button>
-          <Button
-            style={{
-              backgroundColor: "#3371b5",
-              color: "#fff",
-              borderRadius: "3px",
-              padding: "7px 30px",
-              // display: displayPlaceOrderBtn,
-            }}
-            //   onClick={handlePlaceOrderBtn}
-          >
-            Add to cart
-          </Button>
-        </div>
       </div>
     );
   } else {
@@ -95,11 +113,14 @@ export default function WishList() {
   return (
     <div>
       <Header />
-      <p>
-        <span onClick={handleHomePage} style={{ cursor: "pointer" }}>
-          Home
-        </span>{" "}
-        / My Wishlist
+      <p className="mini-header">
+        <span
+          onClick={handleHomePage}
+          style={{ cursor: "pointer", color: "#8a8a8a" }}
+        >
+          Home /
+        </span>
+        <b> My Wishlist</b>
       </p>
       {loading ? <h1>loading....</h1> : display}
 

@@ -19,7 +19,7 @@
     display: flex;
     padding: 0px 120px;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     font-family: sans-serif;
 }
 
@@ -101,4 +101,67 @@
         font-size: small;
     }
 
+}
+
+@media only screen and (max-width: 800px) {
+    .books-container {
+        padding: 0px 30px;
+    }
+
+    .single-book-container {
+        width: 250px;
+    }
+
+    .book-div {
+        padding: 13px;
+        padding-top: 0;
+    }
+
+    .book-name,
+    .book-price {
+        font-size: small;
+    }
+
+    .book-author {
+        font-size: smaller;
+    }
+
+    .image {
+        width: 130px;
+        height: 150px;
+    }
+
+    .book-btns {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .books-container {
+        padding: 0px 30px;
+    }
+
+    .single-book-container {
+        width: 250px;
+    }
+
+    .book-div {
+        padding: 13px;
+        padding-top: 0;
+    }
+
+    .book-name,
+    .book-price {
+        font-size: small;
+    }
+
+    .book-author {
+        font-size: smaller;
+    }
+
+    .image {
+        width: 130px;
+        height: 150px;
+    }
 }

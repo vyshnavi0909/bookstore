@@ -75,6 +75,13 @@ class UserServices {
       },
     });
   };
+
+  removeFromWishlist = (id) => {
+    return axios.deleteMethod(
+      `${baseUrl}bookstore_user/remove_wishlist_item/${id}`,
+      config
+    );
+  };
 }
 
 export default UserServices;
