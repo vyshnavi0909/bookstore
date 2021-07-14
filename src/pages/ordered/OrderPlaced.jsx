@@ -6,7 +6,6 @@ import { Button } from "@material-ui/core";
 import { useHistory } from "react-router";
 import UserServices from "../../services/UserServices";
 import { useState } from "react";
-import { log } from "async";
 
 const services = new UserServices();
 export default function OrderPlaced() {
