@@ -196,13 +196,41 @@ export default function DisplayBooks(props) {
         anchorEl={anchorEl}
         placement="right"
         transition
-        style={{ boxShadow: "1px 1px 5px #888" }}
+        style={{
+          boxShadow: "1px 1px 5px #888",
+          width: "500px",
+          height: "396.8px",
+        }}
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper>
-              <Typography style={{ padding: "20px" }}>
-                {bookDescription}
+              <Typography
+                style={{
+                  padding: "2px 20px",
+                  textAlign: "justify",
+                  boxShadow: "none",
+                  height: "396.8px",
+                }}
+              >
+                <b style={{ margin: "10px 0" }}>Book Detail</b>
+                <br />
+                {bookDescription}. Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and scrambled it to make a
+                type specimen book. It has survived not only five centuries, but
+                also the leap into electronic typesetting, remaining essentially
+                unchanged.It's just a dummy text of the printing and typesetting
+                industry.
+                <br />
+                Lorem Ipsum is simply dummy text of printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since 1500s, when an unknown printer took galley of
+                type and scrambled it to make a type specimen book. It survived
+                not only five centuries, but also leap into electronic
+                typesetting, remaining essentially unchanged.It's just a dummy
+                text of printing and typesetting industry.
               </Typography>
             </Paper>
           </Fade>
