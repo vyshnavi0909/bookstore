@@ -186,7 +186,7 @@ export default function Cart() {
                     src={bookImage}
                   />
                 </div>
-                <div className="book-details">
+                <div className="cart-book-details">
                   <p className="cart-head">{book.product_id.bookName}</p>
                   <p className="cart-tag">by {book.product_id.author}</p>
                   <p className="cart-head">Rs. {book.product_id.price}</p>
@@ -425,7 +425,7 @@ export default function Cart() {
         >
           Home /
         </span>
-        <b> My Cart</b>
+        <b className="cart-heading"> My Cart</b>
       </p>
       {loading ? <h1>loading....</h1> : display}
 

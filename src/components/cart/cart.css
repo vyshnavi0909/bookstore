@@ -1,15 +1,14 @@
 .cart-container {
     height: 100%;
-    margin: 10px 200px;
+    margin: 0 200px;
     font-family: serif;
-    margin-bottom: 50px;
     padding-bottom: 50px;
 }
 
 .place-order-div,
 .Customer-details-div,
 .order-summary-div {
-    padding: 30px 50px;
+    padding: 10px 50px;
     padding-bottom: 20px;
     border: 1px solid #dadada;
     border-radius: 3px;
@@ -52,12 +51,10 @@
 
 }
 
-.book-details {
+.cart-book-details {
     padding-top: 10px;
     margin-left: 30px;
 }
-
-
 
 .quantity {
     padding: 2px 10px;
@@ -112,10 +109,6 @@
     margin-right: 10%;
 }
 
-.order-summary-div {
-    margin-bottom: 50px;
-}
-
 @media only screen and (max-width : 1100px) {
     .cust-det-div {
         margin-right: 0;
@@ -125,24 +118,19 @@
 
 @media only screen and (max-width: 830px) {
     .cart-container {
-        margin-left: 100px;
-        margin-right: 100px;
+        margin: 10px 100px;
     }
-
 
     .cart-heading {
-        font-size: large;
-        margin: 0;
+        font-size: medium;
     }
-
 
 }
 
 @media only screen and (max-width : 700px) {
 
     .cart-container {
-        margin-left: 5%;
-        margin-right: 5%;
+        margin: 5%;
     }
 
     .text-input {
@@ -162,32 +150,6 @@
 
 @media only screen and (max-width: 500px) {
 
-    .cart-heading {
-        font-size: medium;
-    }
-
-    .cart-head {
-        font-size: small;
-    }
-
-    .cart-book-div {
-        display: flex;
-        margin: 15px 0;
-    }
-
-    .book-details {
-        padding-top: 0px;
-        margin-left: 20px;
-    }
-
-    .quantity {
-        margin: 4px 0;
-    }
-
-    .remove-btn {
-        font-size: small;
-    }
-
     .place-order-div,
     .Customer-details-div,
     .order-summary-div {
@@ -197,11 +159,16 @@
         margin: 10px;
     }
 
+    .cart-book-details {
+        margin-left: 10px;
+    }
 
+    .cart-head {
+        font-size: medium;
+    }
 
     .cart-tag {
-        font-size: x-small;
-        padding: 5px 0;
+        font-size: smaller;
     }
 
     .book-quantity {
