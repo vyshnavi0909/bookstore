@@ -229,7 +229,7 @@ export default function DisplayBooks(props) {
           <h2 className="header-text">Books</h2>
           <p className="header-tag">(128 items)</p>
         </div>
-        <select name="sortBy" id="sortBy">
+        <select className="sort-by-rel" name="sortBy" id="sortBy">
           <option>Sort by relevance</option>
           <option>Price: Low to High</option>
           <option>Price: High to Low</option>

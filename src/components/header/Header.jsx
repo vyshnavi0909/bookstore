@@ -38,7 +38,7 @@ export default function Header(props) {
       <header className="home-header">
         <div className="header-text" onClick={handleHomePage}>
           <img src={book} alt="book" className="header-book-icon" />
-          <p>Bookstore</p>
+          <p className="header-book-tag">Bookstore</p>
         </div>
         <div className="header-search-div">
           <SearchIcon fontSize="small" />

@@ -1,7 +1,10 @@
 .display-books-header {
     display: flex;
+    margin: 20px;
     justify-content: space-between;
-    padding: 30px 150px;
+    width: 83%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .header-text-div {
@@ -13,6 +16,11 @@
 .header-tag {
     margin: 0;
     padding: 0;
+}
+
+.header-tag {
+    color: #a3a3a3;
+    font-size: small;
 }
 
 .books-container {
@@ -97,11 +105,17 @@
     position: absolute;
 }
 
+.sort-by-rel {
+    padding: 0 10px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: 1px solid #a3a3a3;
+}
+
 @media only screen and (max-width: 1185px) {
 
     .books-container {
         padding: 0px 90px;
-        background-color: #cf4141;
     }
 
     .single-book-container {
@@ -184,5 +198,13 @@
     .image {
         width: 130px;
         height: 150px;
+    }
+
+    .header-text {
+        font-size: medium;
+    }
+
+    .header-tag {
+        font-size: small;
     }
 }
