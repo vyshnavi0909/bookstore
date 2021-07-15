@@ -60,7 +60,7 @@ export default function WishList() {
   if (count > 0) {
     display = (
       <div className="list-container">
-        <h2 className="wishlist-header">My WishList({count})</h2>
+        <h2 className="wishlist-heading">My WishList({count})</h2>
         {wishListBooks.map((book, index) => (
           <div key={index}>
             <div className="list-book-div">
@@ -77,9 +77,10 @@ export default function WishList() {
                 <p className="cart-head">Rs. {book.product_id.price}</p>
               </div>
               <div className="wishlist-btns">
-                <Button>
+                <Button style={{ padding: 0 }}>
                   <DeleteIcon
                     color="disabled"
+                    style={{ padding: 0 }}
                     onClick={() => handleDelete(book.product_id._id)}
                   />
                 </Button>
@@ -88,8 +89,9 @@ export default function WishList() {
                     backgroundColor: "#3371b5",
                     color: "#fff",
                     borderRadius: "3px",
-                    padding: "7px 30px",
-                    height: "50px",
+                    padding: "2px",
+                    height: "35px",
+                    width: "110px",
                   }}
                   onClick={() => handleAddToCart(book.product_id._id)}
                 >
@@ -122,7 +124,9 @@ export default function WishList() {
         </span>
         <b> My Wishlist</b>
       </p>
-      {loading ? <h1>loading....</h1> : display}
+      <div className="container-div">
+        {loading ? <h1>loading....</h1> : display}
+      </div>
 
       <Footer />
     </div>

@@ -1,4 +1,8 @@
-.wishlist-header {
+.container-div {
+    padding-bottom: 100px;
+}
+
+.wishlist-heading {
     background-color: #eeeeee;
     padding: 20px;
     margin: 0;
@@ -6,11 +10,13 @@
 
 .list-container {
     border: 1px solid #cecece;
-    margin: 0 200px 50px;
+    margin: 0 200px;
+
 }
 
 .mini-header {
-    margin: 20px 190px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .list-book-div {
@@ -28,5 +34,89 @@
 }
 
 .wishlist-btns {
+    display: flex;
     align-self: center;
+}
+
+@media only screen and (max-width:1000px) {
+
+    .cart-head {
+        font-size: medium;
+    }
+
+    .cart-tag {
+        font-size: x-small;
+    }
+
+    .list-container {
+        margin: 0 100px;
+    }
+}
+
+@media only screen and (max-width:740px) {
+    .wishlist-btns {
+        flex-direction: column;
+        align-self: center;
+    }
+
+    .wishlist-heading {
+        font-size: medium;
+        padding: 10px;
+    }
+
+    .list-container {
+        margin: 0 50px;
+    }
+}
+
+@media only screen and (max-width:550px) {
+    .list-book-div {
+        margin: 30px;
+    }
+
+    .mini-header {
+        font-size: small;
+    }
+
+    .book-details {
+        width: 100%;
+    }
+
+    .list-container {
+        margin: 0 5%;
+    }
+}
+
+@media only screen and (max-width:450px) {
+    .list-book-div {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .book-details {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .cart-head {
+        font-size: medium;
+    }
+
+    .cart-tag {
+        font-size: small;
+    }
+
+    .wishlist-btns {
+        width: 100%;
+        margin-top: 10px;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .list-container {
+        margin: 0 30px;
+    }
 }
