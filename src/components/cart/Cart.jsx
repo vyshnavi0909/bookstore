@@ -102,6 +102,7 @@ export default function Cart() {
     services
       .placeOrder(data)
       .then((res) => {
+        console.log(res);
         history.push("/bookstore/order-placed");
       })
       .catch((err) => {

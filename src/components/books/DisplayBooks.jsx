@@ -17,6 +17,7 @@ export default function DisplayBooks(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [bookDescription, setDesc] = useState("");
+  const [wishlist, setWishlist] = useState();
   const booksList = props.books;
   const [cartBooks, setCartBooks] = useState();
   const [pager, setPager] = useState({
@@ -69,18 +70,6 @@ export default function DisplayBooks(props) {
       });
   };
 
-  const isPresent = (cartbook, id) => {
-    if (cartbook !== undefined) {
-      var count = cartbook.length;
-      for (var i = 0; i < count; i++) {
-        if (cartbook[i].product_id._id == id) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
   const handleDescOnHover = (e, book) => {
     if (book.description !== undefined) {
       setDesc(book.description);
@@ -95,11 +84,55 @@ export default function DisplayBooks(props) {
 
   useEffect(() => {
     getCartItems();
-    console.log("useEffct");
+    getWishList();
+    console.log(booksList);
   }, []);
 
-  const handleButton = (item_id) => {
-    var present = isPresent(cartBooks, item_id);
+  const getWishList = () => {
+    services
+      .getFromWishList()
+      .then((res) => {
+        console.log(res);
+        setWishlist(res.data.result);
+      })
+      .catch((err) => {
+        console.log("get wl", err);
+      });
+  };
+
+  const addToWishlist = (book) => {
+    services.addToWishList(book._id).then((res) => {
+      console.log(res);
+      getWishList();
+    });
+  };
+
+  const isPresent = (cartbook, id) => {
+    if (cartbook !== undefined) {
+      var count = cartbook.length;
+      for (var i = 0; i < count; i++) {
+        if (cartbook[i].product_id._id == id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  const isInWishlist = (wishlist, id) => {
+    if (wishlist !== undefined) {
+      for (let i = 0; i < wishlist.length; i++) {
+        if (wishlist[i].product_id._id === id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  const handleButton = (book) => {
+    var present = isPresent(cartBooks, book._id);
+    var inWishlist = isInWishlist(wishlist, book._id);
     var btn;
 
     if (present) {
@@ -113,6 +146,36 @@ export default function DisplayBooks(props) {
             }}
           >
             Added to bag
+          </Button>
+        </div>
+      );
+    } else if (inWishlist) {
+      btn = (
+        <div className="btn-after-clicked">
+          <Button
+            style={{
+              width: "100%",
+              backgroundColor: "#cf4141",
+              color: "#fff",
+            }}
+          >
+            Added to Wishlist
+          </Button>
+        </div>
+      );
+    } else if (book.quantity <= 1) {
+      btn = (
+        <div>
+          <Button
+            style={{
+              border: "1px solid #000000",
+              padding: "5px",
+              width: "100%",
+            }}
+            className="wishlist-btn"
+            onClick={() => addToWishlist(book)}
+          >
+            WishList
           </Button>
         </div>
       );
@@ -146,6 +209,19 @@ export default function DisplayBooks(props) {
     return btn;
   };
 
+  const handleOutOfStock = (book) => {
+    let bookQuantity = book.quantity;
+    if (bookQuantity <= 1) {
+      return <div className="out-of-stock">OUT OF STOCK</div>;
+    }
+  };
+
+  const ifOutOfStock = (book) => {
+    if (book.quantity <= 1) {
+      return <div className="if-out-of-stock"></div>;
+    }
+  };
+
   return (
     <div>
       <div className="display-books-header">
@@ -175,16 +251,18 @@ export default function DisplayBooks(props) {
                 borderRadius: "6px",
               }}
             >
-              <CardContent style={{ padding: "0" }}>
+              <CardContent style={{ padding: "0", position: "relative" }}>
+                {ifOutOfStock(book)}
                 <div className="book-image">
                   <img className="image" src={bookImage} alt="book" />
                 </div>
+                {handleOutOfStock(book)}
                 <div className="book-div">
                   <h3 className="book-name">{book.bookName}</h3>
                   <p className="book-author">by {book.author}</p>
                   <h3 className="book-price">Rs. {book.price}</h3>
                   <div onClick={() => addBookToCart(book._id)}>
-                    {handleButton(book._id)}
+                    {handleButton(book)}
                   </div>
                 </div>
               </CardContent>
