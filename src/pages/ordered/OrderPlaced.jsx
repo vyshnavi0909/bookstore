@@ -49,43 +49,44 @@ export default function OrderPlaced() {
     <div>
       <Header />
       <div className="order-placed-page">
-        <div>
-          <h1>Order Placed Successfully</h1>
-          <p>
-            hurray!!! your order is confirmed the order id is #123456 save the
-            order id for further communication..
-          </p>
-          <div className="continue-shopping-btn">
-            <Button
-              style={{
-                backgroundColor: "#3371b5",
-                color: "#fff",
-                borderRadius: "3px",
-                padding: "7px 30px",
-              }}
-              onClick={handleContinueShopping}
-            >
-              Continue Shopping
-            </Button>
+        {loading ? (
+          ""
+        ) : (
+          <div>
+            <h1>Order Placed Successfully</h1>
+            <p className="para-order">
+              hurray!!! your order is confirmed the order id is #123456 save the
+              order id for further communication..
+            </p>
+            <table className="details-table">
+              <tr style={{ backgroundColor: "#eeeeee" }}>
+                <th>Email us</th>
+                <th>Contact us</th>
+                <th>Address</th>
+              </tr>
+              <tr>
+                <td>{userDetails.email}</td>
+                <td>{userDetails.phone}</td>
+                <td className="address-td">{settingAddress()}</td>
+              </tr>
+            </table>
+            <div className="continue-shopping-btn">
+              <Button
+                style={{
+                  backgroundColor: "#3371b5",
+                  color: "#fff",
+                  borderRadius: "3px",
+                  padding: "7px 30px",
+                }}
+                onClick={handleContinueShopping}
+              >
+                Continue Shopping
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
-      {loading ? (
-        ""
-      ) : (
-        <table className="details-table">
-          <tr>
-            <th>Email us</th>
-            <th>Contact us</th>
-            <th>Address</th>
-          </tr>
-          <tr>
-            <td>{userDetails.email}</td>
-            <td>{userDetails.phone}</td>
-            <td className="address-td">{settingAddress()}</td>
-          </tr>
-        </table>
-      )}
+
       <Footer />
     </div>
   );

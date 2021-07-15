@@ -27,10 +27,16 @@ export default function Header(props) {
   const openWishlist = () => {
     history.push("/bookstore/wishlist");
   };
+
+  const handleHomePage = () => {
+    history.push("/bookstore");
+  };
+
+  const handleSearch = (e) => {};
   return (
     <div>
       <header className="home-header">
-        <div className="header-text">
+        <div className="header-text" onClick={handleHomePage}>
           <img src={book} alt="book" className="header-book-icon" />
           <p>Bookstore</p>
         </div>
@@ -40,6 +46,7 @@ export default function Header(props) {
             type="search"
             className="search-input"
             placeholder="Search"
+            onChange={handleSearch}
           ></input>
         </div>
         <div className="header-icons">

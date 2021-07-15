@@ -1,19 +1,24 @@
 .order-placed-page {
     text-align: center;
-    height: 61vh;
+    margin: 50px auto;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .continue-shopping-btn {
-    margin: 50px 0;
+    margin: 34px 0;
+}
+
+.para-order {
+    width: 50%;
+    margin: auto;
 }
 
 .details-table {
-    /* width: 100%; */
-    margin: 45px auto;
-    margin-top: 0;
+    margin: 100px auto;
+    margin-bottom: 0;
     text-align: center;
     border: 1px solid #a1a1a1;
 }
