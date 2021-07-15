@@ -30,7 +30,41 @@ td {
 
 }
 
-
 .address-td {
     border-right: none;
+}
+
+@media only screen and (max-width: 650px) {
+    .details-table {
+        font-size: small;
+        margin: 50px auto;
+    }
+
+    .para-order {
+        font-size: small;
+    }
+
+    .order-placed-heading {
+        font-size: medium;
+    }
+
+    td {
+        padding: 10px;
+
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .details-table {
+        font-size: 10px;
+        letter-spacing: 0;
+    }
+
+    .address-td {
+        width: 50px;
+    }
+
+    td {
+        padding: 0;
+    }
 }

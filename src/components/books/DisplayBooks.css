@@ -7,6 +7,11 @@
     margin-right: auto;
 }
 
+.whole-div {
+    margin-bottom: 100px;
+    padding-bottom: 60px;
+}
+
 .header-text-div {
     display: flex;
     align-items: center;
@@ -158,7 +163,7 @@
     }
 
     .book-author {
-        font-size: smaller;
+        font-size: x-small;
     }
 
     .image {
@@ -173,27 +178,6 @@
 }
 
 @media only screen and (max-width: 500px) {
-    .books-container {
-        padding: 0px 30px;
-    }
-
-    .single-book-container {
-        width: 250px;
-    }
-
-    .book-div {
-        padding: 13px;
-        padding-top: 0;
-    }
-
-    .book-name,
-    .book-price {
-        font-size: small;
-    }
-
-    .book-author {
-        font-size: smaller;
-    }
 
     .image {
         width: 130px;
@@ -207,4 +191,39 @@
     .header-tag {
         font-size: small;
     }
+
+    .book-image {
+        padding: 15px 0;
+    }
+
+    .sort-by-rel {
+        outline: none;
+        padding: 0 5px;
+        font-size: x-small;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+
+    .book-div {
+        padding: 10px;
+        padding-top: 0;
+    }
+
+    .book-name,
+    .book-price,
+    .header-text {
+        font-size: small;
+    }
+
+    .book-author,
+    .header-tag {
+        font-size: x-small;
+    }
+
+    .image {
+        width: 110px;
+        height: 120px;
+    }
+
 }

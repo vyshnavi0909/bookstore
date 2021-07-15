@@ -96,7 +96,7 @@ export default function Cart() {
       orders.push(add);
     }
     let data = {
-      orders,
+      orders: orders,
     };
     console.log(data);
     services
@@ -175,7 +175,7 @@ export default function Cart() {
     display = (
       <div className="cart-container">
         <div className="place-order-div">
-          <h2>My cart ({count})</h2>
+          <h2 className="cart-heading">My cart ({count})</h2>
           {cartBooks.map((book, index) => (
             <div key={index}>
               <div className="cart-book-div">
@@ -209,8 +209,9 @@ export default function Cart() {
                       />
                     </div>
                     <p
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer", margin: 0 }}
                       onClick={() => handleDelete(book._id)}
+                      className="remove-btn"
                     >
                       Remove
                     </p>

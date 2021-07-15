@@ -2,6 +2,8 @@
     height: 100%;
     margin: 10px 200px;
     font-family: serif;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 .place-order-div,
@@ -110,6 +112,10 @@
     margin-right: 10%;
 }
 
+.order-summary-div {
+    margin-bottom: 50px;
+}
+
 @media only screen and (max-width : 1100px) {
     .cust-det-div {
         margin-right: 0;
@@ -119,24 +125,31 @@
 
 @media only screen and (max-width: 830px) {
     .cart-container {
-        margin: 10px 100px;
+        margin-left: 100px;
+        margin-right: 100px;
     }
+
+
+    .cart-heading {
+        font-size: large;
+        margin: 0;
+    }
+
 
 }
 
 @media only screen and (max-width : 700px) {
 
     .cart-container {
-        margin: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
-
 
     .text-input {
         width: 100%;
     }
 
     .textarea-div {
-
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -149,6 +162,32 @@
 
 @media only screen and (max-width: 500px) {
 
+    .cart-heading {
+        font-size: medium;
+    }
+
+    .cart-head {
+        font-size: small;
+    }
+
+    .cart-book-div {
+        display: flex;
+        margin: 15px 0;
+    }
+
+    .book-details {
+        padding-top: 0px;
+        margin-left: 20px;
+    }
+
+    .quantity {
+        margin: 4px 0;
+    }
+
+    .remove-btn {
+        font-size: small;
+    }
+
     .place-order-div,
     .Customer-details-div,
     .order-summary-div {
@@ -158,13 +197,11 @@
         margin: 10px;
     }
 
-    .cart-head {
-        font-size: medium;
-    }
+
 
     .cart-tag {
-        font-size: smaller;
-
+        font-size: x-small;
+        padding: 5px 0;
     }
 
     .book-quantity {

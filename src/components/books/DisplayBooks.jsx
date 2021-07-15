@@ -111,7 +111,7 @@ export default function DisplayBooks(props) {
     if (cartbook !== undefined) {
       var count = cartbook.length;
       for (var i = 0; i < count; i++) {
-        if (cartbook[i].product_id._id == id) {
+        if (cartbook[i].product_id._id === id) {
           return true;
         }
       }
@@ -223,7 +223,7 @@ export default function DisplayBooks(props) {
   };
 
   return (
-    <div>
+    <div className="whole-div">
       <div className="display-books-header">
         <div className="header-text-div">
           <h2 className="header-text">Books</h2>

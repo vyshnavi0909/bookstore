@@ -53,7 +53,7 @@ export default function OrderPlaced() {
           ""
         ) : (
           <div>
-            <h1>Order Placed Successfully</h1>
+            <h1 className="order-placed-heading">Order Placed Successfully</h1>
             <p className="para-order">
               hurray!!! your order is confirmed the order id is #123456 save the
               order id for further communication..
@@ -65,7 +65,7 @@ export default function OrderPlaced() {
                 <th>Address</th>
               </tr>
               <tr>
-                <td>{userDetails.email}</td>
+                <td className="email-td">{userDetails.email}</td>
                 <td>{userDetails.phone}</td>
                 <td className="address-td">{settingAddress()}</td>
               </tr>
