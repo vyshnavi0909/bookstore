@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header count={cartCount} />
+      <Header count={cartCount} books={books} />
       <div className="home-body">
         {loading ? null : <DisplayBooks books={books} getBooks={getBooks} />}
       </div>

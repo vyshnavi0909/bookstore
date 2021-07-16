@@ -18,7 +18,7 @@ export default function DisplayBooks(props) {
   const [open, setOpen] = React.useState(false);
   const [bookDescription, setDesc] = useState("");
   const [wishlist, setWishlist] = useState();
-  const booksList = props.books;
+  const [booksList, setBooks] = useState(props.books);
   const [cartBooks, setCartBooks] = useState();
   const [pager, setPager] = useState({
     books: booksList,
@@ -82,24 +82,6 @@ export default function DisplayBooks(props) {
     setOpen(false);
   };
 
-  useEffect(() => {
-    getCartItems();
-    getWishList();
-    console.log(booksList);
-  }, []);
-
-  const getWishList = () => {
-    services
-      .getFromWishList()
-      .then((res) => {
-        console.log(res);
-        setWishlist(res.data.result);
-      })
-      .catch((err) => {
-        console.log("get wl", err);
-      });
-  };
-
   const addToWishlist = (book) => {
     services.addToWishList(book._id).then((res) => {
       console.log(res);
@@ -143,6 +125,7 @@ export default function DisplayBooks(props) {
               backgroundColor: "#1976df",
               color: "#ffffff",
               width: "100%",
+              fontSize: "small",
             }}
           >
             Added to bag
@@ -157,6 +140,7 @@ export default function DisplayBooks(props) {
               width: "100%",
               backgroundColor: "#cf4141",
               color: "#fff",
+              fontSize: "small",
             }}
           >
             Added to Wishlist
@@ -171,6 +155,7 @@ export default function DisplayBooks(props) {
               border: "1px solid #000000",
               padding: "5px",
               width: "100%",
+              fontSize: "small",
             }}
             className="wishlist-btn"
             onClick={() => addToWishlist(book)}
@@ -188,6 +173,7 @@ export default function DisplayBooks(props) {
               color: "#ffffff",
               padding: "5px",
               width: "49%",
+              fontSize: "x-small",
             }}
             className="add-to-bag-btn"
           >
@@ -198,6 +184,7 @@ export default function DisplayBooks(props) {
               border: "1px solid #000000",
               padding: "5px",
               width: "49%",
+              fontSize: "x-small",
             }}
             className="wishlist-btn"
           >
@@ -222,6 +209,47 @@ export default function DisplayBooks(props) {
     }
   };
 
+  const lowToHigh = () => {
+    var ltoh = booksList.sort((a, b) => a.price - b.price);
+    setBooks(ltoh);
+    console.log("l to h");
+  };
+
+  const highToLow = () => {
+    var htol = booksList.sort((a, b) => a.price - b.price).reverse();
+    setBooks(htol);
+    console.log("h to l");
+  };
+
+  const handleZToA = () => {
+    var ztoa = booksList.reverse();
+    setBooks(ztoa);
+    console.log("z to a");
+  };
+
+  const handleAToZ = () => {
+    var atoz = booksList.sort();
+    setBooks(atoz);
+    console.log("a to z");
+  };
+
+  const getWishList = () => {
+    services
+      .getFromWishList()
+      .then((res) => {
+        console.log(res);
+        setWishlist(res.data.result);
+      })
+      .catch((err) => {
+        console.log("get wl", err);
+      });
+  };
+
+  useEffect(() => {
+    getCartItems();
+    getWishList();
+  }, []);
+
   return (
     <div className="whole-div">
       <div className="display-books-header">
@@ -229,11 +257,16 @@ export default function DisplayBooks(props) {
           <h2 className="header-text">Books</h2>
           <p className="header-tag">(128 items)</p>
         </div>
-        <select className="sort-by-rel" name="sortBy" id="sortBy">
-          <option>Sort by relevance</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-          <option>Newest Arrivals</option>
+        <select
+          className="sort-by-rel"
+          name="sortBy"
+          id="sortBy"
+          placeholder="Sort by relevance"
+        >
+          <option onSelect={handleAToZ}>Alphabetical: A to Z</option>
+          <option onSelect={handleZToA}>Alphabetical: Z to A</option>
+          <option onClick={lowToHigh}>Price: Low to High</option>
+          <option onClick={highToLow}>Price: High to Low</option>
         </select>
       </div>
       <div className="books-container">

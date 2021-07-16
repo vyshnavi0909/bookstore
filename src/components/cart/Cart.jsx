@@ -103,7 +103,10 @@ export default function Cart() {
       .placeOrder(data)
       .then((res) => {
         console.log(res);
-        history.push("/bookstore/order-placed");
+        history.push({
+          pathname: "/bookstore/order-placed",
+          state: { detail: res.data },
+        });
       })
       .catch((err) => {
         console.log("order", err);
@@ -381,7 +384,7 @@ export default function Cart() {
                     <div className="book-image-div">
                       <img alt="bookImage" src={bookImage} />
                     </div>
-                    <div className="book-details">
+                    <div className="cart-book-details">
                       <h3 className="title">{book.product_id.bookName}</h3>
                       <p className="">by {book.product_id.author}</p>
                       <h3>Rs. {book.product_id.price}</h3>

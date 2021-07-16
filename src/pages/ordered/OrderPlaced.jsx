@@ -6,11 +6,13 @@ import { Button } from "@material-ui/core";
 import { useHistory } from "react-router";
 import UserServices from "../../services/UserServices";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const services = new UserServices();
 export default function OrderPlaced() {
   const [userDetails, setDetails] = useState();
   const history = new useHistory();
+  const location = new useLocation();
   const [loading, setLoader] = useState(true);
 
   const getDetails = () => {
@@ -40,6 +42,8 @@ export default function OrderPlaced() {
   useEffect(() => {
     getDetails();
     console.log("useEffct");
+    console.log(location.pathname);
+    console.log(location.state.detail);
   }, []);
 
   const handleContinueShopping = () => {
