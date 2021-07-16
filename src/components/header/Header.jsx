@@ -6,7 +6,15 @@ import BagIcon from "@material-ui/icons/LocalMallOutlined";
 import WishListIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import "./Header.css";
 import book from "./education.svg";
-import { Badge, Divider, Fade, Paper, Popper } from "@material-ui/core";
+import {
+  Badge,
+  Divider,
+  Fade,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+} from "@material-ui/core";
 import { useHistory } from "react-router";
 import { useState } from "react";
 
@@ -14,6 +22,9 @@ export default function Header(props) {
   const history = new useHistory();
   const [openPopper, setPopper] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const arrayOfBooks = props.books;
+  const [input, setInput] = useState("");
+  const [listOpen, setOpen] = useState(false);
 
   const openCart = () => {
     history.push("/bookstore/cart");
@@ -32,7 +43,23 @@ export default function Header(props) {
     history.push("/bookstore");
   };
 
-  const handleSearch = (e) => {};
+  const handleSearch = (e) => {
+    setInput(e.target.value);
+    setOpen(true);
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleOnBlur = () => {
+    setOpen(false);
+  };
+
+  const searchArray = () => {
+    var list = arrayOfBooks
+      .filter((val) => val.bookName === input)
+      .map((val, index) => <MenuItem key={index}>{val.bookName}</MenuItem>);
+    return list;
+  };
+
   return (
     <div>
       <header className="home-header">
@@ -46,9 +73,12 @@ export default function Header(props) {
             type="search"
             className="search-input"
             placeholder="Search"
+            // value={input}
             onChange={handleSearch}
-          ></input>
+            onMouseLeave={handleOnBlur}
+          />
         </div>
+
         <div className="header-icons">
           <Divider orientation="vertical" flexItem />
           <div className="header-profile-icon" onClick={openProfile}>
@@ -65,6 +95,21 @@ export default function Header(props) {
           <Divider orientation="vertical" flexItem />
         </div>
       </header>
+      <Popper
+        style={{ width: "50%" }}
+        open={listOpen}
+        anchorEl={anchorEl}
+        placement="bottom"
+        transition
+      >
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps} timeout={350}>
+            <Paper>
+              <MenuList>{searchArray()}</MenuList>
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
       <Popper
         open={openPopper}
         anchorEl={anchorEl}
