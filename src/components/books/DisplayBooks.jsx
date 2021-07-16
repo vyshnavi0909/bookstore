@@ -209,10 +209,31 @@ export default function DisplayBooks(props) {
     }
   };
 
+  const handleSelector = (e) => {
+    console.log(e.target.value);
+    let val = e.target.value;
+    switch (val) {
+      case "ztoa":
+        handleZToA();
+        break;
+      case "atoz":
+        handleAToZ();
+        break;
+      case "ltoh":
+        lowToHigh();
+        break;
+      case "htol":
+        highToLow();
+        break;
+      default:
+        console.log("invalid");
+    }
+  };
+
   const lowToHigh = () => {
+    console.log("l to h");
     var ltoh = booksList.sort((a, b) => a.price - b.price);
     setBooks(ltoh);
-    console.log("l to h");
   };
 
   const highToLow = () => {
@@ -222,13 +243,15 @@ export default function DisplayBooks(props) {
   };
 
   const handleZToA = () => {
-    var ztoa = booksList.reverse();
+    var atoz = booksList.sort((a, b) => a.bookName.localeCompare(b.bookName));
+
+    var ztoa = atoz.reverse();
     setBooks(ztoa);
     console.log("z to a");
   };
 
   const handleAToZ = () => {
-    var atoz = booksList.sort();
+    var atoz = booksList.sort((a, b) => a.bookName.localeCompare(b.bookName));
     setBooks(atoz);
     console.log("a to z");
   };
@@ -262,11 +285,13 @@ export default function DisplayBooks(props) {
           name="sortBy"
           id="sortBy"
           placeholder="Sort by relevance"
+          onChange={handleSelector}
         >
-          <option onSelect={handleAToZ}>Alphabetical: A to Z</option>
-          <option onSelect={handleZToA}>Alphabetical: Z to A</option>
-          <option onClick={lowToHigh}>Price: Low to High</option>
-          <option onClick={highToLow}>Price: High to Low</option>
+          <option>Sort By Relevance</option>
+          <option value="atoz">Alphabetical: A to Z</option>
+          <option value="ztoa">Alphabetical: Z to A</option>
+          <option value="ltoh">Price: Low to High</option>
+          <option value="htol">Price: High to Low</option>
         </select>
       </div>
       <div className="books-container">

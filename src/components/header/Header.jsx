@@ -54,9 +54,9 @@ export default function Header(props) {
   };
 
   const searchArray = () => {
-    var list = arrayOfBooks
-      .filter((val) => val.bookName === input)
-      .map((val, index) => <MenuItem key={index}>{val.bookName}</MenuItem>);
+    var list = arrayOfBooks.map((val, index) => (
+      <MenuItem key={index}>{val.bookName}</MenuItem>
+    ));
     return list;
   };
 
