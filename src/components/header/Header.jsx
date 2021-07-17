@@ -109,7 +109,7 @@ export default function Header(props) {
           <Divider orientation="vertical" flexItem />
           <div className="header-cart-icon">
             <Badge badgeContent={context} color="secondary">
-              <CartIcon onClick={openCart} />
+              <CartIcon onClick={openCart} className="cart-icon" />
             </Badge>
             <p className="cart-header-tag">Cart</p>
           </div>

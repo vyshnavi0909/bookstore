@@ -333,22 +333,14 @@ export default function DisplayBooks(props) {
         anchorEl={anchorEl}
         placement="right"
         transition
-        style={{
-          boxShadow: "1px 1px 5px #888",
-          width: "500px",
-          height: "396.8px",
-        }}
+        className="popper-div"
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper>
               <Typography
-                style={{
-                  padding: "2px 20px",
-                  textAlign: "justify",
-                  boxShadow: "none",
-                  height: "396.8px",
-                }}
+                className="typography-div"
+                style={{ fontSize: "small" }}
               >
                 <b style={{ margin: "10px 0" }}>Book Detail</b>
                 <br />

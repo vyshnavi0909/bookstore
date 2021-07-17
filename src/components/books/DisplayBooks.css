@@ -17,6 +17,19 @@
     align-items: center;
 }
 
+.popper-div {
+    width: 500px;
+    box-shadow: 1px 1px 5px #888;
+    height: 396.8px;
+}
+
+.typography-div {
+    padding: 2px 20px;
+    text-align: justify;
+    box-shadow: none;
+    height: 396.8px;
+}
+
 .header-text,
 .header-tag {
     margin: 0;
@@ -174,6 +187,19 @@
     .book-btns {
         display: flex;
         justify-content: space-around;
+    }
+
+    .popper-div {
+        width: 340px;
+        box-shadow: 1px 1px 5px #888;
+        height: 396.8px;
+    }
+
+    .typography-div {
+        padding: 2px 20px;
+        text-align: justify;
+        box-shadow: none;
+        height: 396.8px;
     }
 }
 
