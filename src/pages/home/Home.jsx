@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import DisplayBooks from "../../components/books/DisplayBooks";
-import BookstoreContext from "../../components/context-files/Context";
 import "./Home.css";
 import UserServices from "../../services/UserServices";
 const services = new UserServices();

@@ -1,5 +1,5 @@
 // import { Card } from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserServices from "../../services/UserServices";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";

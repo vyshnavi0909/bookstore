@@ -10,9 +10,9 @@ import {
   Badge,
   Divider,
   Fade,
-  List,
-  MenuItem,
-  MenuList,
+  // List,
+  // MenuItem,
+  // MenuList,
   Paper,
   Popper,
 } from "@material-ui/core";
@@ -29,7 +29,7 @@ export default function Header(props) {
     openProfile: false,
     anchorEl: null,
   });
-  const arrayOfBooks = props.books;
+  // const arrayOfBooks = props.books;
   const [input, setInput] = useState("");
 
   const openCart = () => {
