@@ -10,6 +10,7 @@ import {
   Badge,
   Divider,
   Fade,
+  List,
   MenuItem,
   MenuList,
   Paper,
@@ -17,22 +18,31 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { useState } from "react";
+import { useContext } from "react";
+import BookstoreContext from "../context-files/Context";
 
 export default function Header(props) {
+  const context = useContext(BookstoreContext);
   const history = new useHistory();
-  const [openPopper, setPopper] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [popper, setPopper] = useState({ openPopper: false, anchorEl: null });
+  const [profile, setProfile] = useState({
+    openProfile: false,
+    anchorEl: null,
+  });
   const arrayOfBooks = props.books;
   const [input, setInput] = useState("");
-  const [listOpen, setOpen] = useState(false);
 
   const openCart = () => {
     history.push("/bookstore/cart");
   };
 
   const openProfile = (e) => {
-    setAnchorEl(e.currentTarget);
-    setPopper(!openPopper);
+    console.log("pro");
+    let prev = profile.openProfile;
+    setProfile({
+      openProfile: !prev,
+      anchorEl: e.currentTarget,
+    });
   };
 
   const openWishlist = () => {
@@ -45,20 +55,22 @@ export default function Header(props) {
 
   const handleSearch = (e) => {
     setInput(e.target.value);
-    setOpen(true);
-    setAnchorEl(e.currentTarget);
+    setPopper({
+      openPopper: true,
+      anchorEl: e.currentTarget,
+    });
   };
 
   const handleOnBlur = () => {
-    setOpen(false);
+    setPopper({ openPopper: false, anchorEl: null });
   };
 
-  const searchArray = () => {
-    var list = arrayOfBooks.map((val, index) => (
-      <MenuItem key={index}>{val.bookName}</MenuItem>
-    ));
-    return list;
-  };
+  // const searchArray = () => {
+  //   var list = arrayOfBooks.map((val, index) => (
+  //     <List key={index}>{val.bookName}</List>
+  //   ));
+  //   return list;
+  // };
 
   return (
     <div>
@@ -77,6 +89,15 @@ export default function Header(props) {
             onChange={handleSearch}
             onMouseLeave={handleOnBlur}
           />
+          <Popper
+            style={{ width: "50%" }}
+            open={popper.openPopper}
+            anchorEl={popper.anchorEl}
+            placement="bottom"
+            transition
+          >
+            {/* <Paper>{searchArray()}</Paper> */}
+          </Popper>
         </div>
 
         <div className="header-icons">
@@ -87,7 +108,7 @@ export default function Header(props) {
           </div>
           <Divider orientation="vertical" flexItem />
           <div className="header-cart-icon">
-            <Badge badgeContent={props.count} color="secondary">
+            <Badge badgeContent={context} color="secondary">
               <CartIcon onClick={openCart} />
             </Badge>
             <p className="cart-header-tag">Cart</p>
@@ -95,24 +116,10 @@ export default function Header(props) {
           <Divider orientation="vertical" flexItem />
         </div>
       </header>
+
       <Popper
-        style={{ width: "50%" }}
-        open={listOpen}
-        anchorEl={anchorEl}
-        placement="bottom"
-        transition
-      >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper>
-              <MenuList>{searchArray()}</MenuList>
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
-      <Popper
-        open={openPopper}
-        anchorEl={anchorEl}
+        open={profile.openProfile}
+        anchorEl={profile.anchorEl}
         placement="bottom"
         transition
         style={{ margin: "15px" }}
