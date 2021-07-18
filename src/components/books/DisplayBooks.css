@@ -18,17 +18,28 @@
 }
 
 .popper-div {
-    width: 500px;
+    width: 400px;
     box-shadow: 1px 1px 5px #888;
     height: 396.8px;
 }
 
 .typography-div {
-    padding: 2px 20px;
+    font-family: serif;
+    padding: 5px 20px;
     text-align: justify;
     box-shadow: none;
     height: 396.8px;
+    letter-spacing: 2;
+    margin: 0;
+    font-size: 16px;
 }
+
+.typography {
+    margin: 0;
+    color: #5c5c5c;
+    margin: 5px 0;
+}
+
 
 .header-text,
 .header-tag {
@@ -130,6 +141,13 @@
     border: 1px solid #a3a3a3;
 }
 
+.active-page {
+    background-color: #A03037;
+    padding: 10px 15px;
+    color: #fff;
+    border-radius: 100%;
+}
+
 @media only screen and (max-width: 1185px) {
 
     .books-container {
@@ -152,6 +170,11 @@
 
     .book-author {
         font-size: small;
+    }
+
+    .popper-div,
+    .typography-div {
+        height: 386px;
     }
 
 }
@@ -189,18 +212,15 @@
         justify-content: space-around;
     }
 
-    .popper-div {
-        width: 340px;
-        box-shadow: 1px 1px 5px #888;
-        height: 396.8px;
+    .popper-div,
+    .typography-div {
+        height: 334.2px;
     }
 
-    .typography-div {
-        padding: 2px 20px;
-        text-align: justify;
-        box-shadow: none;
-        height: 396.8px;
+    .typography {
+        margin-bottom: 0;
     }
+
 }
 
 @media only screen and (max-width: 500px) {

@@ -6,38 +6,49 @@ import {
   Fade,
   Paper,
   Popper,
-  Typography,
 } from "@material-ui/core";
 import bookImage from "./bookImage.png";
 import "./DisplayBooks.css";
 import UserService from "../../services/UserServices";
+import prevLogo from "./prev.svg";
+import nextLogo from "./next.svg";
+import { useContext } from "react";
+import BookstoreContext from "../context-files/Context";
 
 const services = new UserService();
 export default function DisplayBooks(props) {
+  const { getCartItems, cartBooks } = useContext(BookstoreContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
-  const [bookDescription, setDesc] = useState("");
   const [wishlist, setWishlist] = useState();
   const [booksList, setBooks] = useState(props.books);
-  const [cartBooks, setCartBooks] = useState();
   const [pager, setPager] = useState({
     books: booksList,
     currentPage: 1,
     booksPerPage: 8,
+    active: 1,
   });
 
-  const { books, currentPage, booksPerPage } = pager;
+  const { books, currentPage, booksPerPage, active } = pager;
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
   const pageNum = [];
-  for (let i = 1; i <= Math.ceil(books.length / booksPerPage); i++) {
-    pageNum.push(i);
+  const maxPage = Math.ceil(books.length / booksPerPage);
+  for (let i = 1; i <= maxPage; i++) {
+    var page = i;
+    if (i === currentPage) {
+      page = <span className="active-page"> {i}</span>;
+    }
+    pageNum.push(page);
   }
 
   const handleClick = useCallback((e) => {
-    setPager({ ...pager, currentPage: Number(e.target.id) });
+    setPager({
+      ...pager,
+      currentPage: Number(e.target.id),
+    });
   }, []);
 
   const renderPageNums = pageNum.map((num) => {
@@ -47,6 +58,14 @@ export default function DisplayBooks(props) {
       </li>
     );
   });
+
+  const next = () => {
+    setPager({ ...pager, currentPage: Math.min(currentPage + 1, maxPage) });
+  };
+
+  const prev = () => {
+    setPager({ ...pager, currentPage: Math.max(currentPage - 1, 1) });
+  };
 
   const addBookToCart = (productid) => {
     services
@@ -59,21 +78,18 @@ export default function DisplayBooks(props) {
       });
   };
 
-  const getCartItems = () => {
-    services
-      .getFromCart()
-      .then((res) => {
-        setCartBooks(res.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getCartItems = () => {
+  //   services
+  //     .getFromCart()
+  //     .then((res) => {
+  //       setCartBooks(res.data.result);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  const handleDescOnHover = (e, book) => {
-    if (book.description !== undefined) {
-      setDesc(book.description);
-    }
+  const handleDescOnHover = (e) => {
     setAnchorEl(e.currentTarget);
     setOpen(true);
   };
@@ -176,6 +192,7 @@ export default function DisplayBooks(props) {
               fontSize: "x-small",
             }}
             className="add-to-bag-btn"
+            onClick={() => addBookToCart(book._id)}
           >
             Add To Bag
           </Button>
@@ -187,6 +204,7 @@ export default function DisplayBooks(props) {
               fontSize: "x-small",
             }}
             className="wishlist-btn"
+            onClick={() => addToWishlist(book)}
           >
             WishList
           </Button>
@@ -210,7 +228,6 @@ export default function DisplayBooks(props) {
   };
 
   const handleSelector = (e) => {
-    console.log(e.target.value);
     let val = e.target.value;
     switch (val) {
       case "ztoa":
@@ -231,7 +248,6 @@ export default function DisplayBooks(props) {
   };
 
   const lowToHigh = () => {
-    console.log("l to h");
     var ltoh = booksList.sort((a, b) => a.price - b.price);
     setBooks(ltoh);
   };
@@ -239,21 +255,17 @@ export default function DisplayBooks(props) {
   const highToLow = () => {
     var htol = booksList.sort((a, b) => a.price - b.price).reverse();
     setBooks(htol);
-    console.log("h to l");
   };
 
   const handleZToA = () => {
     var atoz = booksList.sort((a, b) => a.bookName.localeCompare(b.bookName));
-
     var ztoa = atoz.reverse();
     setBooks(ztoa);
-    console.log("z to a");
   };
 
   const handleAToZ = () => {
     var atoz = booksList.sort((a, b) => a.bookName.localeCompare(b.bookName));
     setBooks(atoz);
-    console.log("a to z");
   };
 
   const getWishList = () => {
@@ -296,12 +308,7 @@ export default function DisplayBooks(props) {
       </div>
       <div className="books-container">
         {currentBooks.map((book, index) => (
-          <div
-            className="single-book-container"
-            key={index}
-            onMouseOver={(e) => handleDescOnHover(e, book)}
-            onMouseOut={handleOnLeave}
-          >
+          <div className="single-book-container" key={index}>
             <Card
               style={{
                 border: "1px solid #E2E2E2",
@@ -311,7 +318,11 @@ export default function DisplayBooks(props) {
             >
               <CardContent style={{ padding: "0", position: "relative" }}>
                 {ifOutOfStock(book)}
-                <div className="book-image">
+                <div
+                  className="book-image"
+                  onMouseOver={handleDescOnHover}
+                  onMouseOut={handleOnLeave}
+                >
                   <img className="image" src={bookImage} alt="book" />
                 </div>
                 {handleOutOfStock(book)}
@@ -319,7 +330,9 @@ export default function DisplayBooks(props) {
                   <h3 className="book-name">{book.bookName}</h3>
                   <p className="book-author">by {book.author}</p>
                   <h3 className="book-price">Rs. {book.price}</h3>
-                  <div onClick={() => addBookToCart(book._id)}>
+                  <div
+                  // onClick={() => addBookToCart(book._id)}
+                  >
                     {handleButton(book)}
                   </div>
                 </div>
@@ -331,41 +344,48 @@ export default function DisplayBooks(props) {
       <Popper
         open={open}
         anchorEl={anchorEl}
-        placement="right"
+        placement="right-start"
         transition
         className="popper-div"
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper>
-              <Typography
-                className="typography-div"
-                style={{ fontSize: "small" }}
-              >
-                <b style={{ margin: "10px 0" }}>Book Detail</b>
-                <br />
-                {bookDescription}. Lorem Ipsum is simply dummy text of the
-                printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an
-                unknown printer took a galley of type and scrambled it to make a
-                type specimen book. It has survived not only five centuries, but
-                also the leap into electronic typesetting, remaining essentially
-                unchanged.It's just a dummy text of the printing and typesetting
-                industry.
-                <br />
-                Lorem Ipsum is simply dummy text of printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since 1500s, when an unknown printer took galley of
-                type and scrambled it to make a type specimen book. It survived
-                not only five centuries, but also leap into electronic
-                typesetting, remaining essentially unchanged.It's just a dummy
-                text of printing and typesetting industry.
-              </Typography>
+              <p className="typography-div">
+                <h3 style={{ margin: 0 }}>Book Detail</h3>
+                <p className="typography">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  type-setting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It survived not only five centuries, but also
+                  the leap into electronic typesetting, remaining essentially
+                  unchanged.It's just a dummy text of the printing and
+                  typesetting industry.
+                </p>
+                <p className="typography">
+                  Lorem Ipsum is simply dummy text of printing and type-setting
+                  industry. Lorem Ipsum has been the industry's standard dummy
+                  text ever since 1500s, when an unknown printer took galley of
+                  type and scrambled it to make a type specimen book. It
+                  survived not only five centuries, but also leap into
+                  electronic typesetting, remaining are essentially unchanged.
+                  It's just a dummy text of printing and typesetting industry.
+                </p>
+              </p>
             </Paper>
           </Fade>
         )}
       </Popper>
-      <ul className="page-number">{renderPageNums}</ul>
+      <ul className="page-number">
+        <span onClick={prev}>
+          <img src={prevLogo} alt="prev" />
+        </span>
+        {renderPageNums}
+        <span onClick={next}>
+          <img src={nextLogo} alt="next" />
+        </span>
+      </ul>
     </div>
   );
 }
