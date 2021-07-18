@@ -14,12 +14,14 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router";
+import { useContext } from "react";
+import BookstoreContext from "../context-files/Context";
 
 const services = new UserServices();
 
 export default function Cart() {
-  const history = new useHistory();
-  const [cartBooks, setCartBooks] = useState([]);
+  const { cartCount, getCartItems, cartBooks } = useContext(BookstoreContext);
+  const history = useHistory();
   const [loading, setLoader] = useState(true);
   const [displayCustdetails, setCustOpen] = useState("none");
   const [displayOrderSum, setOrderOpen] = useState("none");
@@ -35,24 +37,16 @@ export default function Cart() {
     pincode: "",
     addressType: "Home",
   });
-  const count = cartBooks.length;
   var display;
-
-  const getCartItems = () => {
-    services
-      .getFromCart()
-      .then((res) => {
-        setCartBooks(res.data.result);
-        setLoader(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handlePlaceOrderBtn = () => {
     setBtn("none");
     setCustOpen("block");
+  };
+
+  const getItems = () => {
+    getCartItems();
+    setLoader(false);
   };
 
   const handleContinue = () => {
@@ -174,11 +168,11 @@ export default function Cart() {
     history.push("/bookstore");
   };
 
-  if (count > 0) {
+  if (cartCount > 0 && cartBooks !== undefined) {
     display = (
       <div className="cart-container">
         <div className="place-order-div">
-          <h2 className="cart-heading">My cart ({count})</h2>
+          <h2 className="cart-heading">My cart ({cartCount})</h2>
           {cartBooks.map((book, index) => (
             <div key={index}>
               <div className="cart-book-div">
@@ -415,7 +409,8 @@ export default function Cart() {
   }
 
   useEffect(() => {
-    getCartItems();
+    getItems();
+    // console.log(cartBooks);
   }, []);
 
   return (

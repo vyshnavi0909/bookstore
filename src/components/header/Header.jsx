@@ -22,8 +22,8 @@ import { useContext } from "react";
 import BookstoreContext from "../context-files/Context";
 
 export default function Header(props) {
-  const context = useContext(BookstoreContext);
-  const history = new useHistory();
+  const { cartCount } = useContext(BookstoreContext);
+  const history = useHistory();
   const [popper, setPopper] = useState({ openPopper: false, anchorEl: null });
   const [profile, setProfile] = useState({
     openProfile: false,
@@ -37,7 +37,6 @@ export default function Header(props) {
   };
 
   const openProfile = (e) => {
-    console.log("pro");
     let prev = profile.openProfile;
     setProfile({
       openProfile: !prev,
@@ -108,7 +107,7 @@ export default function Header(props) {
           </div>
           <Divider orientation="vertical" flexItem />
           <div className="header-cart-icon">
-            <Badge badgeContent={context} color="secondary">
+            <Badge badgeContent={cartCount} color="secondary">
               <CartIcon onClick={openCart} className="cart-icon" />
             </Badge>
             <p className="cart-header-tag">Cart</p>

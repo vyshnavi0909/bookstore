@@ -30,7 +30,6 @@ export default function Home() {
         let books = res.data.result;
         setBooks(books);
         setLoading(false);
-        console.log(res.data.result);
       })
       .catch((err) => {
         console.log(err);
@@ -45,14 +44,10 @@ export default function Home() {
 
   return (
     <div>
-      <Header
-        // count={cartCount}
-        books={books}
-      />
+      <Header books={books} />
       <div className="home-body">
         {loading ? null : <DisplayBooks books={books} getBooks={getBooks} />}
       </div>
-
       <Footer />
     </div>
   );
