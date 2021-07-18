@@ -12,7 +12,7 @@ import { useHistory } from "react-router";
 const services = new UserServices();
 
 export default function WishList() {
-  const history = new useHistory();
+  const history = useHistory();
   const [wishListBooks, setListBooks] = useState([]);
   const [loading, setLoader] = useState(true);
 

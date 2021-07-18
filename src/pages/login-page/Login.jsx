@@ -12,7 +12,7 @@ export default function Login() {
   const [password, setPass] = useState("");
   const [mailError, setMailErr] = useState(false);
   const [passError, setPassErr] = useState(false);
-  const history = new useHistory();
+  const history = useHistory();
   const validation = () => {
     let isError = false;
     if (email === "") {

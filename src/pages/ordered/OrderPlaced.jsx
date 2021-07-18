@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 const services = new UserServices();
 export default function OrderPlaced() {
   const [userDetails, setDetails] = useState();
-  const history = new useHistory();
+  const history = useHistory();
   const location = new useLocation();
   const [loading, setLoader] = useState(true);
 

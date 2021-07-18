@@ -26,10 +26,9 @@ export default function DisplayBooks(props) {
     books: booksList,
     currentPage: 1,
     booksPerPage: 8,
-    active: 1,
   });
 
-  const { books, currentPage, booksPerPage, active } = pager;
+  const { books, currentPage, booksPerPage } = pager;
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -77,17 +76,6 @@ export default function DisplayBooks(props) {
         console.log(err);
       });
   };
-
-  // const getCartItems = () => {
-  //   services
-  //     .getFromCart()
-  //     .then((res) => {
-  //       setCartBooks(res.data.result);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   const handleDescOnHover = (e) => {
     setAnchorEl(e.currentTarget);
@@ -330,11 +318,7 @@ export default function DisplayBooks(props) {
                   <h3 className="book-name">{book.bookName}</h3>
                   <p className="book-author">by {book.author}</p>
                   <h3 className="book-price">Rs. {book.price}</h3>
-                  <div
-                  // onClick={() => addBookToCart(book._id)}
-                  >
-                    {handleButton(book)}
-                  </div>
+                  <div>{handleButton(book)}</div>
                 </div>
               </CardContent>
             </Card>
@@ -351,7 +335,7 @@ export default function DisplayBooks(props) {
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper>
-              <p className="typography-div">
+              <article className="typography-div">
                 <h3 style={{ margin: 0 }}>Book Detail</h3>
                 <p className="typography">
                   Lorem Ipsum is simply dummy text of the printing and
@@ -372,7 +356,7 @@ export default function DisplayBooks(props) {
                   electronic typesetting, remaining are essentially unchanged.
                   It's just a dummy text of printing and typesetting industry.
                 </p>
-              </p>
+              </article>
             </Paper>
           </Fade>
         )}

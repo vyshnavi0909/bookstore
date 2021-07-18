@@ -410,7 +410,6 @@ export default function Cart() {
 
   useEffect(() => {
     getItems();
-    // console.log(cartBooks);
   }, []);
 
   return (

@@ -6,16 +6,7 @@ import BagIcon from "@material-ui/icons/LocalMallOutlined";
 import WishListIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import "./Header.css";
 import book from "./education.svg";
-import {
-  Badge,
-  Divider,
-  Fade,
-  // List,
-  // MenuItem,
-  // MenuList,
-  Paper,
-  Popper,
-} from "@material-ui/core";
+import { Badge, Divider, Fade, Paper, Popper } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { useState } from "react";
 import { useContext } from "react";
@@ -24,13 +15,10 @@ import BookstoreContext from "../context-files/Context";
 export default function Header(props) {
   const { cartCount } = useContext(BookstoreContext);
   const history = useHistory();
-  const [popper, setPopper] = useState({ openPopper: false, anchorEl: null });
   const [profile, setProfile] = useState({
     openProfile: false,
     anchorEl: null,
   });
-  // const arrayOfBooks = props.books;
-  const [input, setInput] = useState("");
 
   const openCart = () => {
     history.push("/bookstore/cart");
@@ -52,25 +40,6 @@ export default function Header(props) {
     history.push("/bookstore");
   };
 
-  const handleSearch = (e) => {
-    setInput(e.target.value);
-    setPopper({
-      openPopper: true,
-      anchorEl: e.currentTarget,
-    });
-  };
-
-  const handleOnBlur = () => {
-    setPopper({ openPopper: false, anchorEl: null });
-  };
-
-  // const searchArray = () => {
-  //   var list = arrayOfBooks.map((val, index) => (
-  //     <List key={index}>{val.bookName}</List>
-  //   ));
-  //   return list;
-  // };
-
   return (
     <div>
       <header className="home-header">
@@ -80,23 +49,7 @@ export default function Header(props) {
         </div>
         <div className="header-search-div">
           <SearchIcon fontSize="small" />
-          <input
-            type="search"
-            className="search-input"
-            placeholder="Search"
-            // value={input}
-            onChange={handleSearch}
-            onMouseLeave={handleOnBlur}
-          />
-          <Popper
-            style={{ width: "50%" }}
-            open={popper.openPopper}
-            anchorEl={popper.anchorEl}
-            placement="bottom"
-            transition
-          >
-            {/* <Paper>{searchArray()}</Paper> */}
-          </Popper>
+          <input type="search" className="search-input" placeholder="Search" />
         </div>
 
         <div className="header-icons">
