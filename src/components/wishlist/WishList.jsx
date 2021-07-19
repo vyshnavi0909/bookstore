@@ -15,6 +15,7 @@ export default function WishList() {
   const history = useHistory();
   const [wishListBooks, setListBooks] = useState([]);
   const [loading, setLoader] = useState(true);
+  const [btnDisplay, setBtn] = useState(true);
 
   const count = wishListBooks.length;
   var display;
@@ -57,6 +58,29 @@ export default function WishList() {
       });
   };
 
+  const addToCartBtn = (product) => {
+    console.log(product.quantity);
+    if (product.quantity > 1) {
+      return (
+        <Button
+          style={{
+            backgroundColor: "#3371b5",
+            color: "#fff",
+            borderRadius: "3px",
+            padding: "2px",
+            height: "35px",
+            width: "110px",
+          }}
+          onClick={() => handleAddToCart(product._id)}
+        >
+          Add to cart
+        </Button>
+      );
+    } else {
+      return <div></div>;
+    }
+  };
+
   if (count > 0) {
     display = (
       <div className="list-container">
@@ -84,19 +108,7 @@ export default function WishList() {
                     onClick={() => handleDelete(book.product_id._id)}
                   />
                 </Button>
-                <Button
-                  style={{
-                    backgroundColor: "#3371b5",
-                    color: "#fff",
-                    borderRadius: "3px",
-                    padding: "2px",
-                    height: "35px",
-                    width: "110px",
-                  }}
-                  onClick={() => handleAddToCart(book.product_id._id)}
-                >
-                  Add to cart
-                </Button>
+                <span>{addToCartBtn(book.product_id)}</span>
               </div>
             </div>
             <Divider />
