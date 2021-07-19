@@ -15,7 +15,6 @@ export default function WishList() {
   const history = useHistory();
   const [wishListBooks, setListBooks] = useState([]);
   const [loading, setLoader] = useState(true);
-  const [btnDisplay, setBtn] = useState(true);
 
   const count = wishListBooks.length;
   var display;
