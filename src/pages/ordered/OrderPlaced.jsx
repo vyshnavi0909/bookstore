@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import UserServices from "../../services/UserServices";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import orderImg from "./order.png";
 
 const services = new UserServices();
 export default function OrderPlaced() {
@@ -58,6 +59,7 @@ export default function OrderPlaced() {
           ""
         ) : (
           <div>
+            <img src={orderImg} alt="order-success" />
             <h1 className="order-placed-heading">Order Placed Successfully</h1>
             <p className="para-order">
               hurray!!! your order is confirmed the order id is #123456 save the
