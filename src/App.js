@@ -13,6 +13,7 @@ const services = new UserServices();
 function App() {
   const [cartCount, setCount] = useState();
   const [cartBooks, setCartBooks] = useState();
+  const [input, setInput] = useState();
 
   const getCartItems = () => {
     services
@@ -28,10 +29,13 @@ function App() {
 
   useEffect(() => {
     getCartItems();
-  }, [cartCount]);
+    console.log(input);
+  }, [cartCount, input]);
 
   return (
-    <BookstoreContext.Provider value={{ cartCount, getCartItems, cartBooks }}>
+    <BookstoreContext.Provider
+      value={{ cartCount, getCartItems, cartBooks, setInput, input }}
+    >
       <Router>
         <Route exact path="/" component={LoginSignUp}></Route>
         <Route exact path="/bookstore" component={Home}></Route>

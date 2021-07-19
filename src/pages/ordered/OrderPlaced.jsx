@@ -39,6 +39,10 @@ export default function OrderPlaced() {
     return address;
   };
 
+  const handleContinueShopping = () => {
+    history.push("/bookstore");
+  };
+
   useEffect(() => {
     getDetails();
     console.log("useEffct");
@@ -46,9 +50,6 @@ export default function OrderPlaced() {
     console.log(location.state.detail);
   }, []);
 
-  const handleContinueShopping = () => {
-    history.push("/bookstore");
-  };
   return (
     <div>
       <Header />
@@ -63,16 +64,16 @@ export default function OrderPlaced() {
               order id for further communication..
             </p>
             <table className="details-table">
-              <tr style={{ backgroundColor: "#eeeeee" }}>
+              <thead style={{ backgroundColor: "#eeeeee" }}>
                 <th>Email us</th>
                 <th>Contact us</th>
                 <th>Address</th>
-              </tr>
-              <tr>
+              </thead>
+              <tbody>
                 <td className="email-td">{userDetails.email}</td>
                 <td>{userDetails.phone}</td>
                 <td className="address-td">{settingAddress()}</td>
-              </tr>
+              </tbody>
             </table>
             <div className="continue-shopping-btn">
               <Button

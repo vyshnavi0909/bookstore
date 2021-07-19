@@ -17,9 +17,10 @@ import BookstoreContext from "../context-files/Context";
 
 const services = new UserService();
 export default function DisplayBooks(props) {
-  const { getCartItems, cartBooks } = useContext(BookstoreContext);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
+  var newList;
+  const { getCartItems, cartBooks, input } = useContext(BookstoreContext);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
   const [wishlist, setWishlist] = useState();
   const [booksList, setBooks] = useState(props.books);
   const [pager, setPager] = useState({
@@ -35,20 +36,25 @@ export default function DisplayBooks(props) {
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
   const pageNum = [];
   const maxPage = Math.ceil(books.length / booksPerPage);
+
   for (let i = 1; i <= maxPage; i++) {
     var page = i;
     if (i === currentPage) {
-      page = <span className="active-page"> {i}</span>;
+      page = <span className="active-page">{i}</span>;
     }
+
     pageNum.push(page);
   }
 
-  const handleClick = useCallback((e) => {
-    setPager({
-      ...pager,
-      currentPage: Number(e.target.id),
-    });
-  }, []);
+  const handleClick = useCallback(
+    (e) => {
+      setPager({
+        ...pager,
+        currentPage: Number(e.target.id),
+      });
+    },
+    [pager]
+  );
 
   const renderPageNums = pageNum.map((num) => {
     return (
@@ -236,23 +242,23 @@ export default function DisplayBooks(props) {
   };
 
   const lowToHigh = () => {
-    var ltoh = booksList.sort((a, b) => a.price - b.price);
+    var ltoh = newList.sort((a, b) => a.price - b.price);
     setBooks(ltoh);
   };
 
   const highToLow = () => {
-    var htol = booksList.sort((a, b) => a.price - b.price).reverse();
+    var htol = newList.sort((a, b) => a.price - b.price).reverse();
     setBooks(htol);
   };
 
   const handleZToA = () => {
-    var atoz = booksList.sort((a, b) => a.bookName.localeCompare(b.bookName));
+    var atoz = newList.sort((a, b) => a.bookName.localeCompare(b.bookName));
     var ztoa = atoz.reverse();
     setBooks(ztoa);
   };
 
   const handleAToZ = () => {
-    var atoz = booksList.sort((a, b) => a.bookName.localeCompare(b.bookName));
+    var atoz = newList.sort((a, b) => a.bookName.localeCompare(b.bookName));
     setBooks(atoz);
   };
 
@@ -272,6 +278,29 @@ export default function DisplayBooks(props) {
     getCartItems();
     getWishList();
   }, []);
+
+  useEffect(() => {
+    let newList = [];
+    if (input !== undefined && input !== "" && input !== null) {
+      let sliced = input.slice(1, input.length);
+      let str1 = input.charAt(0).toLowerCase() + sliced;
+      let str2 = input.charAt(0).toUpperCase() + sliced;
+      newList = props.books.filter(
+        (book) =>
+          book.bookName.includes(str1) ||
+          book.author.includes(str1) ||
+          book.bookName.includes(str2) ||
+          book.author.includes(str2)
+      );
+    } else {
+      newList = props.books;
+    }
+    setBooks(newList);
+    setPager({
+      ...pager,
+      books: booksList,
+    });
+  }, [input]);
 
   return (
     <div className="whole-div">

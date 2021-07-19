@@ -13,7 +13,7 @@ import { useContext } from "react";
 import BookstoreContext from "../context-files/Context";
 
 export default function Header(props) {
-  const { cartCount } = useContext(BookstoreContext);
+  const { cartCount, setInput } = useContext(BookstoreContext);
   const history = useHistory();
   const [profile, setProfile] = useState({
     openProfile: false,
@@ -36,6 +36,10 @@ export default function Header(props) {
     history.push("/bookstore/wishlist");
   };
 
+  const handleOnInput = (e) => {
+    setInput(e.target.value);
+  };
+
   const handleHomePage = () => {
     history.push("/bookstore");
   };
@@ -49,7 +53,13 @@ export default function Header(props) {
         </div>
         <div className="header-search-div">
           <SearchIcon fontSize="small" />
-          <input type="search" className="search-input" placeholder="Search" />
+          <input
+            type="search"
+            className="search-input"
+            placeholder="Search"
+            style={{ padding: "5px" }}
+            onChange={handleOnInput}
+          />
         </div>
 
         <div className="header-icons">

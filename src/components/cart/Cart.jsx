@@ -36,7 +36,22 @@ export default function Cart() {
     locality: "",
     pincode: "",
     addressType: "Home",
+    nameError: false,
+    numError: false,
+    landmarkError: false,
+    addressError: false,
+    cityError: false,
+    localityError: false,
+    pincodeError: false,
   });
+  const [nameErr, setNameErr] = useState(false);
+  const [numErr, setNumErr] = useState(false);
+  const [landmarkErr, setLandmarkErr] = useState(false);
+  const [addressErr, setAddrErr] = useState(false);
+  const [cityErr, setCityErr] = useState(false);
+  const [localityErr, setLocalityErr] = useState(false);
+  const [pincodeErr, setPinErr] = useState(false);
+
   var display;
 
   const handlePlaceOrderBtn = () => {
@@ -47,35 +62,6 @@ export default function Cart() {
   const getItems = () => {
     getCartItems();
     setLoader(false);
-  };
-
-  const handleContinue = () => {
-    let isFilled =
-      custDetails.name !== "" &&
-      custDetails.phoneNum !== "" &&
-      custDetails.pincode !== "" &&
-      custDetails.locality !== "" &&
-      custDetails.address !== "" &&
-      custDetails.city !== "" &&
-      custDetails.landmark !== "";
-    if (isFilled) {
-      let data = {
-        addressType: custDetails.addressType,
-        fullAddress: custDetails.address,
-        city: custDetails.city,
-        state: custDetails.locality,
-      };
-      services
-        .editCustomerDetails(data)
-        .then((res) => {
-          console.log("edit", res);
-          setOrderOpen("block");
-          setCustOpen("none");
-        })
-        .catch((err) => {
-          console.log("edit", err);
-        });
-    }
   };
 
   const handleCheckout = () => {
@@ -156,6 +142,79 @@ export default function Cart() {
       ...custDetails,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const validation = () => {
+    let isErr = false;
+    if (custDetails.name === "") {
+      setNameErr(true);
+    } else {
+      setNameErr(false);
+    }
+    if (custDetails.phoneNum === "") {
+      setNumErr(true);
+    } else {
+      setNumErr(false);
+    }
+    if (custDetails.landmark === "") {
+      setLandmarkErr(true);
+    } else {
+      setLandmarkErr(false);
+    }
+    if (custDetails.address === "") {
+      setAddrErr(true);
+    } else {
+      setAddrErr(false);
+    }
+    if (custDetails.locality === "") {
+      setLocalityErr(true);
+    } else {
+      setLocalityErr(false);
+    }
+    if (custDetails.city === "") {
+      setCityErr(true);
+    } else {
+      setCityErr(false);
+    }
+    if (custDetails.pincode === "") {
+      setPinErr(true);
+    } else {
+      setPinErr(false);
+    }
+
+    isErr =
+      addressErr ||
+      cityErr ||
+      localityErr ||
+      landmarkErr ||
+      nameErr ||
+      numErr ||
+      pincodeErr;
+    console.log(isErr);
+    return isErr;
+  };
+
+  const handleContinue = () => {
+    let isFilled = validation();
+    if (!isFilled) {
+      console.log(isFilled);
+      let data = {
+        addressType: custDetails.addressType,
+        fullAddress: custDetails.address,
+        city: custDetails.city,
+        state: custDetails.locality,
+      };
+      services
+        .editCustomerDetails(data)
+        .then((res) => {
+          console.log("edit", res);
+          setOrderOpen("block");
+          setCustOpen("none");
+        })
+        .catch((err) => {
+          console.log("edit", err);
+        });
+    }
   };
 
   const handleDelete = (id) => {
@@ -240,6 +299,8 @@ export default function Cart() {
                 <div className="inner-div">
                   <TextField
                     name="name"
+                    error={nameErr}
+                    helperText={nameErr ? "Enter name" : ""}
                     label="Name"
                     variant="outlined"
                     className="text-input"
@@ -250,6 +311,8 @@ export default function Cart() {
                 <div className="inner-div">
                   <TextField
                     name="phoneNum"
+                    error={numErr}
+                    helperText={numErr ? "Enter phone number" : ""}
                     label="Phone Number"
                     variant="outlined"
                     className="text-input"
@@ -262,6 +325,8 @@ export default function Cart() {
                 <div className="inner-div">
                   <TextField
                     name="pincode"
+                    error={pincodeErr}
+                    helperText={pincodeErr ? "Enter pincode" : ""}
                     label="Pincode"
                     variant="outlined"
                     className="text-input"
@@ -272,6 +337,8 @@ export default function Cart() {
                 <div className="inner-div">
                   <TextField
                     name="locality"
+                    error={localityErr}
+                    helperText={localityErr ? "Enter locality" : ""}
                     label="locality"
                     variant="outlined"
                     className="text-input"
@@ -283,6 +350,8 @@ export default function Cart() {
               <div className="textarea-div addr-ta">
                 <TextareaAutosize
                   name="address"
+                  error={addressErr}
+                  helperText={addressErr ? "Enter address" : ""}
                   className="address-ta"
                   placeholder="Address"
                   style={{
@@ -300,6 +369,8 @@ export default function Cart() {
                 <div className="inner-div">
                   <TextField
                     name="city"
+                    error={cityErr}
+                    helperText={cityErr ? "Enter city" : ""}
                     label="city/town"
                     variant="outlined"
                     className="text-input"
@@ -310,6 +381,8 @@ export default function Cart() {
                 <div className="inner-div">
                   <TextField
                     name="landmark"
+                    error={landmarkErr}
+                    helperText={landmarkErr ? "Enter landmark" : ""}
                     label="Landmark"
                     variant="outlined"
                     className="text-input"
@@ -424,7 +497,7 @@ export default function Cart() {
         </span>
         <b className="cart-heading"> My Cart</b>
       </p>
-      {loading ? <h1>loading....</h1> : display}
+      {loading ? null : display}
 
       <Footer />
     </div>

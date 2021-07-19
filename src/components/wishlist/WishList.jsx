@@ -124,9 +124,7 @@ export default function WishList() {
         </span>
         <b> My Wishlist</b>
       </p>
-      <div className="container-div">
-        {loading ? <h1>loading....</h1> : display}
-      </div>
+      <div className="container-div">{loading ? null : display}</div>
 
       <Footer />
     </div>
