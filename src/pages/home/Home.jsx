@@ -9,6 +9,7 @@ const services = new UserServices();
 export default function Home() {
   const [books, setBooks] = useState();
   const [loading, setLoading] = useState(true);
+  const [input, setInput] = useState();
 
   //   getting books from api
   var getBooks = () => {
@@ -27,13 +28,15 @@ export default function Home() {
   //similar to componentDidMount
   useEffect(() => {
     getBooks();
-  }, []);
+  }, [input]);
 
   return (
     <div>
-      <Header books={books} />
+      <Header books={books} setInput={setInput} />
       <div className="home-body">
-        {loading ? null : <DisplayBooks books={books} getBooks={getBooks} />}
+        {loading ? null : (
+          <DisplayBooks books={books} getBooks={getBooks} input={input} />
+        )}
       </div>
       <Footer />
     </div>

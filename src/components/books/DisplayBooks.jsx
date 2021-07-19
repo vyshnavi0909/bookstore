@@ -18,7 +18,7 @@ import BookstoreContext from "../context-files/Context";
 const services = new UserService();
 export default function DisplayBooks(props) {
   var newList;
-  const { getCartItems, cartBooks, input } = useContext(BookstoreContext);
+  const { getCartItems, cartBooks } = useContext(BookstoreContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [wishlist, setWishlist] = useState();
@@ -28,6 +28,7 @@ export default function DisplayBooks(props) {
     currentPage: 1,
     booksPerPage: 8,
   });
+  const input = props.input;
 
   const { books, currentPage, booksPerPage } = pager;
 
@@ -295,10 +296,10 @@ export default function DisplayBooks(props) {
     } else {
       newList = props.books;
     }
-    setBooks(newList);
+
     setPager({
       ...pager,
-      books: booksList,
+      books: newList,
     });
   }, [input]);
 

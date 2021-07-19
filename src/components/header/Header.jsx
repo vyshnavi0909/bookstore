@@ -13,7 +13,7 @@ import { useContext } from "react";
 import BookstoreContext from "../context-files/Context";
 
 export default function Header(props) {
-  const { cartCount, setInput } = useContext(BookstoreContext);
+  const { cartCount } = useContext(BookstoreContext);
   const history = useHistory();
   const [profile, setProfile] = useState({
     openProfile: false,
@@ -37,7 +37,7 @@ export default function Header(props) {
   };
 
   const handleOnInput = (e) => {
-    setInput(e.target.value);
+    props.setInput(e.target.value);
   };
 
   const handleHomePage = () => {

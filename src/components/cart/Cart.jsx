@@ -147,7 +147,7 @@ export default function Cart() {
   const validation = () => {
     let isErr = false;
     if (custDetails.name === "") {
-      setNameErr(true);
+      setNameErr(!nameErr);
     } else {
       setNameErr(false);
     }
