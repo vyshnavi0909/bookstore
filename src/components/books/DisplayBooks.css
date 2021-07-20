@@ -223,6 +223,22 @@
 
 }
 
+@media only screen and (max-width: 700px) {
+
+    .popper-div {
+        width: 390px;
+    }
+
+    .popper-div,
+    .typography-div {
+        height: fit-content
+    }
+
+    .typography-div {
+        font-size: 14px;
+    }
+}
+
 @media only screen and (max-width: 500px) {
 
     .image {
@@ -247,6 +263,15 @@
         padding: 0 5px;
         font-size: x-small;
     }
+
+    .popper-div {
+        width: 100%;
+    }
+
+    .typography-div {
+        font-size: x-small;
+    }
+
 }
 
 @media only screen and (max-width: 350px) {
@@ -265,6 +290,14 @@
     .book-author,
     .header-tag {
         font-size: x-small;
+    }
+
+    .popper-div {
+        width: 100%;
+    }
+
+    .typography-div {
+        font-size: 10px;
     }
 
     .image {

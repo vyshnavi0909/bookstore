@@ -14,15 +14,19 @@ import prevLogo from "./prev.svg";
 import nextLogo from "./next.svg";
 import { useContext } from "react";
 import BookstoreContext from "../context-files/Context";
+import { useMediaQuery } from "@material-ui/core";
 
 const services = new UserService();
 export default function DisplayBooks(props) {
+  const matches = useMediaQuery("(max-width: 700px)");
+
   var newList;
   const { getCartItems, cartBooks } = useContext(BookstoreContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [wishlist, setWishlist] = useState();
   const [booksList, setBooks] = useState(props.books);
+  const [popperPlacement, setPlacement] = useState(false);
   const [pager, setPager] = useState({
     books: booksList,
     currentPage: 1,
@@ -358,7 +362,7 @@ export default function DisplayBooks(props) {
       <Popper
         open={open}
         anchorEl={anchorEl}
-        placement="right-start"
+        placement={matches ? "bottom" : "right-start"}
         transition
         className="popper-div"
       >
