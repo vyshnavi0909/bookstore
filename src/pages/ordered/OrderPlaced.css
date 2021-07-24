@@ -7,6 +7,11 @@
     align-items: center;
 }
 
+.order-placed-heading {
+    margin: 0;
+    font-weight: 400;
+}
+
 .continue-shopping-btn {
     margin: 34px 0;
 }
@@ -46,6 +51,7 @@ td {
 
     .order-placed-heading {
         font-size: medium;
+        margin: 0;
     }
 
     td {
