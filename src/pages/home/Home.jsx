@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Profiler, useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import DisplayBooks from "../../components/books/DisplayBooks";
@@ -30,15 +30,29 @@ export default function Home() {
     getBooks();
   }, [input]);
 
+  const logTimes = (id, phase, actualTime, baseTime, startTime, commitTime) => {
+    console.log(`${id}'s ${phase} phase:`);
+    console.log(`Actual time: ${actualTime}`);
+    console.log(`Base time: ${baseTime}`);
+    console.log(`Start time: ${startTime}`);
+    console.log(`Commit time: ${commitTime}`);
+  };
+
   return (
     <div>
-      <Header books={books} setInput={setInput} />
-      <div className="home-body">
-        {loading ? null : (
-          <DisplayBooks books={books} getBooks={getBooks} input={input} />
-        )}
-      </div>
-      <Footer />
+      <Profiler id="home-header-comp" onRender={logTimes}>
+        <Header books={books} setInput={setInput} />
+      </Profiler>
+      <Profiler id="home-body-comp" onRender={logTimes}>
+        <div className="home-body">
+          {loading ? null : (
+            <DisplayBooks books={books} getBooks={getBooks} input={input} />
+          )}
+        </div>
+      </Profiler>
+      <Profiler id="home-footer-comp" onRender={logTimes}>
+        <Footer />
+      </Profiler>
     </div>
   );
 }
