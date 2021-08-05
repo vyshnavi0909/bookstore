@@ -26,7 +26,6 @@ export default function DisplayBooks(props) {
   const [open, setOpen] = useState(false);
   const [wishlist, setWishlist] = useState();
   const [booksList, setBooks] = useState(props.books);
-  const [popperPlacement, setPlacement] = useState(false);
   const [pager, setPager] = useState({
     books: booksList,
     currentPage: 1,

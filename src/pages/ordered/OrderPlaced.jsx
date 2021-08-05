@@ -53,7 +53,7 @@ export default function OrderPlaced() {
   }, []);
 
   return (
-    <div>
+    <div className="order-container">
       <Header />
       <div className="order-placed-page">
         {loading ? (
@@ -69,9 +69,11 @@ export default function OrderPlaced() {
             </p>
             <table className="details-table">
               <thead style={{ backgroundColor: "#eeeeee" }}>
-                <th>Email us</th>
-                <th>Contact us</th>
-                <th>Address</th>
+                <tr>
+                  <th>Email us</th>
+                  <th>Contact us</th>
+                  <th>Address</th>
+                </tr>
               </thead>
               <tbody>
                 <td className="email-td">{userDetails.email}</td>

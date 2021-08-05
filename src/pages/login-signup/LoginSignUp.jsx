@@ -30,14 +30,22 @@ export default function LoginSignup() {
         </div>
         <div className="login-signup">
           <div className="btns-div">
-            <Button style={{ color: loginColor }} onClick={handleClick}>
+            <Button
+              style={{ color: loginColor }}
+              onClick={handleClick}
+              className="btn-comp"
+            >
               <h2 className="btn-tag">LOGIN</h2>
             </Button>
-            <Button style={{ color: signupColor }} onClick={handleClick}>
+            <Button
+              style={{ color: signupColor }}
+              onClick={handleClick}
+              className="btn-comp"
+            >
               <h2 className="btn-tag">SIGNUP</h2>
             </Button>
           </div>
-          <div>{pageContent}</div>
+          <div className="comp-div">{pageContent}</div>
         </div>
       </div>
     </div>

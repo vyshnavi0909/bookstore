@@ -1,11 +1,15 @@
-// import { Card } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import UserServices from "../../services/UserServices";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import "./cart.css";
 import bookImage from "./bookImage.png";
-import { Button, TextareaAutosize, TextField } from "@material-ui/core";
+import {
+  Button,
+  FormHelperText,
+  TextareaAutosize,
+  TextField,
+} from "@material-ui/core";
 import AddIcon from "./add.svg";
 import RemoveIcon from "./remove.svg";
 import Radio from "@material-ui/core/Radio";
@@ -351,7 +355,7 @@ export default function Cart() {
                 <TextareaAutosize
                   name="address"
                   error={addressErr}
-                  helperText={addressErr ? "Enter address" : ""}
+                  // helpertext={addressErr ? "Enter address" : ""}
                   className="address-ta"
                   placeholder="Address"
                   style={{
@@ -365,6 +369,8 @@ export default function Cart() {
                   onChange={handleChange}
                 />
               </div>
+              {addressErr ? <FormHelperText>Enter Address</FormHelperText> : ""}
+
               <div className="textarea-div">
                 <div className="inner-div">
                   <TextField
@@ -391,7 +397,6 @@ export default function Cart() {
                   />
                 </div>
               </div>
-
               <div className="textarea-div">
                 <FormControl component="fieldset">
                   <FormLabel component="legend">Type</FormLabel>
